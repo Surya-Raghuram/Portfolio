@@ -1,23 +1,41 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "type": "object",
-  "properties": {
-    "date": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "mood": {
-      "type": "string"
-    },
-    "draft": {
-      "default": false,
-      "type": "boolean"
-    },
-    "$schema": {
-      "type": "string"
+  "$ref": "#/definitions/journal",
+  "definitions": {
+    "journal": {
+      "type": "object",
+      "properties": {
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "mood": {
+          "type": "string"
+        },
+        "draft": {
+          "type": "boolean",
+          "default": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "date"
+      ],
+      "additionalProperties": false
     }
   },
-  "required": [
-    "date"
-  ]
+  "$schema": "http://json-schema.org/draft-07/schema#"
 }

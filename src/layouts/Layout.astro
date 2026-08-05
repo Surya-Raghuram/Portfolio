@@ -1,6 +1,5 @@
 ---
 import linkPreview from '../assets/link_preview.png';
-import { getCollection } from 'astro:content';
 
 interface Props {
   title?: string;
@@ -10,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = 'Ayan Mahata',
-  description = 'My cozy corner on the interwebs!',
+  title = 'Durga Surya Raghuram Gadepalli',
+  description = 'My digital portfolio and projects.',
   image,
   type = 'website',
 } = Astro.props;
@@ -19,15 +18,9 @@ const {
 const navLinks = [
   { label: 'HOME', href: '/' },
   { label: 'WORK', href: '/work' },
-  { label: 'BLOG', href: '/blog' },
 ];
 
 const currentPath = Astro.url.pathname;
-
-// Compute latest blog post ID at build time for notification dot logic
-const allPosts = await getCollection('blog', ({ data }) => !data.draft);
-allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestBlogId = allPosts.length > 0 ? allPosts[0].id : '';
 
 // Generate canonical URL and absolute image URL
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
@@ -40,8 +33,8 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="Ayan Mahata" />
-    <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
+    <meta name="author" content="Durga Surya Raghuram Gadepalli" />
+    <meta name="theme-color" content="#050505" id="theme-color-meta" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content={type} />
@@ -57,178 +50,124 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={resolvedImageURL} />
 
-    <!-- Anti-FOUC Dark Mode Script -->
-    <script is:inline>
-      const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'dark';
-        }
-        return 'light';
-      })();
-      if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
-      }
-    </script>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class="bg-black text-white">
     <!-- Custom Magic Cursor -->
     <div id="magic-cursor"></div>
 
     <!-- Navigation -->
-    <nav class="site-nav" id="site-nav">
-      <div class="nav-inner">
-        <div class="nav-brand-group">
-          <a href="/" class="nav-brand" id="nav-home">
-            AYAN MAHATA
+    <nav class="fixed top-6 left-0 right-0 z-[100] px-4 md:px-8 max-w-[1100px] mx-auto w-full transition-all duration-300" id="site-nav">
+      <div class="neo-panel flex items-center justify-between px-6 py-4 rounded-[32px]">
+        <div class="flex items-center gap-4">
+          <a href="/" class="font-heading text-xl font-bold tracking-tight text-white hover:text-[var(--color-cyan)] transition-colors" id="nav-home">
+            SURYA RAGHURAM
           </a>
-          <div class="nav-socials">
+          <div class="hidden md:flex items-center gap-3 ml-4 border-l border-white/10 pl-4">
             <a
-              href="https://github.com/RickyTheDude"
+              href="https://github.com/suryaraghuramg"
               target="_blank"
               rel="noopener noreferrer"
-              class="neo-social-btn"
-              id="header-github"
+              class="text-white/60 hover:text-white transition-colors"
               aria-label="GitHub Profile"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
             </a>
             <a
-              href="https://x.com/AyanMahata2"
+              href="https://www.linkedin.com/in/surya-raghuramg"
               target="_blank"
               rel="noopener noreferrer"
-              class="neo-social-btn"
-              id="header-twitter"
-              aria-label="X (Twitter) Profile"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none" class="social-icon"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path></svg>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/ayan-mahata/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="neo-social-btn"
-              id="header-linkedin"
+              class="text-white/60 hover:text-[#0a66c2] transition-colors"
               aria-label="LinkedIn Profile"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
             </a>
           </div>
         </div>
-        <ul class="nav-links" id="nav-links">
+        <ul class="flex items-center gap-2 md:gap-4 m-0 p-0 list-none">
           {navLinks.map((link) => (
-            <li class="nav-link-item">
+            <li>
               <a
                 href={link.href}
-                class="neo-btn"
-                id={`nav-${link.label.toLowerCase()}`}
-                data-latest-blog={link.label === 'BLOG' ? latestBlogId : undefined}
+                class="neo-btn text-xs md:text-sm px-4 py-2"
               >
                 {link.label}
-                {link.label === 'BLOG' && (
-                  <span class="blog-notif-dot" id="blog-notif-dot" aria-hidden="true"></span>
-                )}
               </a>
             </li>
           ))}
-          <li>
-            <button
-              class="neo-social-btn dark-toggle"
-              id="dark-toggle"
-              aria-label="Toggle dark mode"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="social-icon sun-icon hidden" id="theme-icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="social-icon moon-icon" id="theme-icon-moon"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
-            </button>
-          </li>
         </ul>
       </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="container-page main-wrapper" id="main-content">
+    <main class="container-page pt-32 pb-24 min-h-[80vh]" id="main-content">
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class="site-footer" id="site-footer">
-      <div class="footer-inner flex flex-col md:flex-row justify-between items-center gap-4 w-full">
+    <footer class="mt-24 pb-12 px-6 max-w-[1100px] mx-auto w-full" id="site-footer">
+      <div class="neo-panel p-8 rounded-[32px] flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-white/60">
         <div class="flex flex-col items-center md:items-start gap-1">
-          <span class="mono font-bold">&copy; {new Date().getFullYear()} AYAN MAHATA</span>
-          <span class="mono font-light text-xs opacity-70">LAST UPDATED: {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}</span>
+          <span class="font-mono font-medium text-white">&copy; {new Date().getFullYear()} DURGA SURYA RAGHURAM GADEPALLI</span>
+          <span class="font-mono text-xs opacity-70">LAST UPDATED: {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}</span>
         </div>
         
-        <div class="footer-tagline text-center">
-          <span class="mono font-light hidden md:inline">My cozy corner on the interwebs!</span>
-          <span class="mono font-light hidden md:inline opacity-40">|</span>
-          <span class="mono text-xs opacity-80">
-            BUILT WITH <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="hover:text-[var(--color-cyan)] transition-colors underline decoration-dotted underline-offset-4 font-bold">ASTRO.JS</a>
-          </span>
+        <div class="text-center font-mono font-light text-xs">
+          <span>BUILT WITH <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-[var(--color-cyan)] hover:text-white transition-colors underline decoration-dotted underline-offset-4 font-bold">ASTRO.JS</a></span>
         </div>
 
         <div class="flex items-center gap-3">
-          <a href="/work#resume-bento-card" class="neo-btn font-bold bg-[var(--color-pink)] hover:bg-[var(--color-cyan)]" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; font-family: var(--font-mono); line-height: 1;">RESUME</a>
-          <button id="footer-contact-trigger" class="neo-btn font-bold" style="padding: 0.25rem 0.75rem; font-size: 0.75rem; font-family: var(--font-mono); line-height: 1;">CONTACT ME</button>
+          <button id="footer-contact-trigger" class="neo-btn neo-btn--yellow text-xs px-4 py-2">CONTACT ME</button>
         </div>
       </div>
     </footer>
 
-
     <!-- Contact Modal -->
-    <dialog id="contact-modal" class="neo-modal-dialog">
-      <div class="sticky-note-modal">
-        <!-- Masking Tape -->
-        <div class="sticky-tape"></div>
-        <button id="close-modal-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+    <dialog id="contact-modal" class="fixed inset-0 m-auto bg-transparent p-0 w-full max-w-none h-full max-h-none overflow-visible z-[200] backdrop-blur-md backdrop-brightness-50" style="display: none;">
+      <div class="neo-panel p-8 md:p-12 max-w-md mx-auto mt-[20vh] relative">
+        <button id="close-modal-btn" class="absolute top-6 right-6 text-white/60 hover:text-white transition-colors" aria-label="Close modal">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
         
-        <div class="sticky-modal-content font-mono">
-          <div class="sticky-modal-header">
-            <span class="sticky-date">SAY HELLO!</span>
+        <div class="flex flex-col gap-6">
+          <div class="border-b border-white/10 pb-4">
+            <h2 class="text-2xl font-bold text-white mb-2">SAY HELLO!</h2>
+            <p class="text-white/70 font-mono text-sm">Have a cool project or just want to chat? Drop me a line.</p>
           </div>
           
-          <p class="sticky-modal-text">
-            Have a cool project or just want to chat? Drop me a line or give me a call!
-          </p>
-          
-          <div class="contact-details">
-            <div class="contact-item">
-              <span class="contact-label">EMAIL:</span>
-              <div class="email-container neo-box">
-                <a href="mailto:academicayan2022@gmail.com" class="email-link">academicayan2022@gmail.com</a>
-                <button id="copy-email-btn" class="copy-btn" title="Copy email">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="copy-icon"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-2">
+              <span class="font-mono text-xs font-bold text-white/50 tracking-wider">EMAIL</span>
+              <div class="flex items-center justify-between bg-white/5 border border-white/10 p-4 rounded-xl">
+                <a href="mailto:suryaraghuramg@gmail.com" class="font-mono text-sm font-medium text-white hover:text-[var(--color-cyan)] transition-colors email-link truncate">suryaraghuramg@gmail.com</a>
+                <button id="copy-email-btn" class="neo-btn px-3 py-1 text-[10px]" title="Copy email">
                   <span id="copy-text">COPY</span>
                 </button>
               </div>
             </div>
             
-            <div class="contact-item">
-              <span class="contact-label">PHONE:</span>
-              <div class="phone-container neo-box">
-                <a href="tel:+917585912067" class="phone-link">+91 7585912067</a>
+            <div class="flex flex-col gap-2">
+              <span class="font-mono text-xs font-bold text-white/50 tracking-wider">PHONE</span>
+              <div class="flex items-center justify-between bg-white/5 border border-white/10 p-4 rounded-xl">
+                <a href="tel:+917676693964" class="font-mono text-sm font-medium text-white hover:text-[var(--color-cyan)] transition-colors">+91 7676693964</a>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </dialog>
 
     <!-- Scroll Progress Line -->
-    <div id="scroll-progress"></div>
+    <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-[var(--color-cyan)] z-[200] transition-all duration-100 ease-out shadow-[0_0_10px_var(--color-cyan)]" style="width: 0%;"></div>
 
     <script>
       import pressSound from '../assets/press-sound.mp3';
@@ -262,14 +201,8 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           };
 
           const [pBuf, cBuf] = await Promise.all([
-            loadBuffer(pressSound).catch((err) => {
-              console.error('Failed to load/decode press sound:', err);
-              return null;
-            }),
-            loadBuffer(clickSound).catch((err) => {
-              console.error('Failed to load/decode click sound:', err);
-              return null;
-            })
+            loadBuffer(pressSound).catch(() => null),
+            loadBuffer(clickSound).catch(() => null)
           ]);
 
           pressBuffer = pBuf;
@@ -279,7 +212,6 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
         }
       };
 
-      // Preload and decode audio in the background
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => { initAudio(); });
       } else {
@@ -289,59 +221,36 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
       const playAudio = (type: 'press' | 'click') => {
         try {
           if (!audioCtx || !clickBuffer || !pressBuffer) {
-            initAudio(); // Try to initialize in the background for next clicks if not ready
-            console.log('playAudio: context or buffers not fully initialized');
+            initAudio(); 
             return;
           }
-
           const buffer = type === 'click' ? clickBuffer : pressBuffer;
-          if (!buffer) {
-            console.log(`playAudio: buffer for ${type} is null`);
-            return;
-          }
-
-          console.log(`playAudio: playing ${type}, duration: ${buffer.duration}s`);
-
-          // Resume context synchronously (crucial for iOS Safari & Chrome gesture verification)
+          if (!buffer) return;
           if (audioCtx.state === 'suspended') {
-            audioCtx.resume().catch((err) => console.debug('Failed to resume AudioContext:', err));
+            audioCtx.resume().catch(() => {});
           }
-
           const source = audioCtx.createBufferSource();
           source.buffer = buffer;
-
           const gainNode = audioCtx.createGain();
-          gainNode.gain.value = type === 'click' ? 0.35 : 0.4; // subtle volumes
-
+          gainNode.gain.value = type === 'click' ? 0.35 : 0.4;
           source.connect(gainNode);
           gainNode.connect(audioCtx.destination);
-          
           source.start(0);
-        } catch (err) {
-          console.debug('Web Audio play failed:', err);
-        }
+        } catch (err) {}
       };
 
-      // Delegate click sound to all buttons, links, and interactive elements
       document.body.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
         if (!target) return;
-
-        // Check if click is on/within a link or a button-like element
         const link = target.closest('a') as HTMLAnchorElement | null;
-        const isInteractive = target.closest('button, [role="button"], .neo-btn, .neo-social-btn, .copy-btn');
+        const isInteractive = target.closest('button, [role="button"], .neo-btn');
 
         if (isInteractive || link) {
-          // Play click-sound.mp3 if it occurs inside the navbar, otherwise play press-sound.mp3
           const isNavbar = target.closest('.site-nav');
-          if (isNavbar) {
-            playAudio('click');
-          } else {
-            playAudio('press');
-          }
+          if (isNavbar) playAudio('click');
+          else playAudio('press');
         }
 
-        // For links that navigate the current page, delay navigation slightly to let the click sound play
         if (link) {
           const href = link.getAttribute('href');
           const targetAttr = link.getAttribute('target');
@@ -349,39 +258,20 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           const isHashOnly = href && (href.startsWith('#') || (link.pathname === window.location.pathname && link.search === window.location.search && href.includes('#')));
           
           if (
-            href &&
-            isSameOrigin &&
-            !isHashOnly &&
-            !href.startsWith('mailto:') &&
-            !href.startsWith('tel:') &&
-            (!targetAttr || targetAttr === '_self') &&
-            !e.metaKey &&
-            !e.ctrlKey &&
-            !e.shiftKey &&
-            e.button === 0
+            href && isSameOrigin && !isHashOnly && !href.startsWith('mailto:') && !href.startsWith('tel:') &&
+            (!targetAttr || targetAttr === '_self') && !e.metaKey && !e.ctrlKey && !e.shiftKey && e.button === 0
           ) {
             e.preventDefault();
-            setTimeout(() => {
-              window.location.href = href;
-            }, 120); // Snappy 120ms delay allows the click sound to play its peak before unloading
+            setTimeout(() => { window.location.href = href; }, 120);
           }
         }
       });
 
-      /**
-       * Pointer Tracking Logic:
-       * Tracks both mouse and touch coordinates across the document.
-       * Updates CSS variables `--mouse-x` and `--mouse-y` on the document root,
-       * which drives the interactive dot matrix background.
-       * It also translates the custom `#magic-cursor` element to follow the pointer.
-       */
       const updateMousePosition = (e: MouseEvent) => {
         document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
         document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-        
         if (magicCursor) {
-          // Use translation for highly performant following
-          magicCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%) rotate(var(--cursor-rotate, 0deg))`;
+          magicCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
         }
       };
 
@@ -392,103 +282,30 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
         }
       };
 
-      // Add listeners for mouse and touch interactions
       window.addEventListener('mousemove', updateMousePosition);
       window.addEventListener('touchmove', updateTouchPosition);
 
-      /**
-       * Scroll Progress & Header Transition Logic:
-       * Calculates how far the user has scrolled down the page as a percentage.
-       * Updates the width of the green `#scroll-progress` bar at the top of the screen.
-       * It also attaches a `ResizeObserver` to the document root so the progress bar
-       * automatically recalculates if the page height dynamically changes (e.g. expanding card stacks).
-       * Finally, it adds a CSS class to the navigation bar when the user reaches the absolute bottom.
-       */
       const updateScrollProgress = () => {
         const currentScrollY = window.scrollY;
         const maxScrollY = document.documentElement.scrollHeight - window.innerHeight;
-        
-        // Calculate progress percentage
         const percent = maxScrollY > 0 ? (currentScrollY / maxScrollY) * 100 : 0;
-        
-        // Update width of the progress bar
         const progressLine = document.getElementById('scroll-progress');
-        if (progressLine) {
-          progressLine.style.width = `${percent}%`;
-        }
+        if (progressLine) progressLine.style.width = `${percent}%`;
 
-        // Smooth header color transition at the bottom
+        // Hide/Show navbar on scroll
         const nav = document.getElementById('site-nav');
         if (nav) {
-          if (percent >= 99.5) { // reached the absolute bottom
-            nav.classList.add('nav-at-bottom');
+          if (currentScrollY > 50) {
+            nav.classList.add('bg-black/50', 'backdrop-blur-md', 'py-2');
           } else {
-            nav.classList.remove('nav-at-bottom');
+            nav.classList.remove('bg-black/50', 'backdrop-blur-md', 'py-2');
           }
         }
       };
 
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
       window.addEventListener('resize', updateScrollProgress, { passive: true });
-      
-      // Automatically update when page layout/height changes dynamically
-      const resizeObserver = new ResizeObserver(() => {
-        updateScrollProgress();
-      });
-      if (document.documentElement) {
-        resizeObserver.observe(document.documentElement);
-      }
 
-      /**
-       * Dynamic Neobrutalist Shadow Tracking:
-       * Finds all elements with `.neo-box` or `.neo-panel` classes.
-       * When the mouse hovers over these elements, it calculates the distance between the 
-       * mouse cursor and the center of the element. It then dynamically updates CSS variables
-       * `--x-shadow` and `--y-shadow` to push the drop shadow away from the cursor,
-       * creating an interactive "light source" effect.
-       */
-      const initDynamicShadows = () => {
-        const tiles = document.querySelectorAll('.neo-box, .neo-panel');
-        
-        tiles.forEach((tile) => {
-          const htmlTile = tile as HTMLElement;
-          
-          htmlTile.addEventListener('mousemove', (e) => {
-            const rect = htmlTile.getBoundingClientRect();
-            const mouseX = e.clientX;
-            const mouseY = e.clientY;
-            
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            const dx = mouseX - centerX;
-            const dy = mouseY - centerY;
-            
-            // Maximum shadow offset in pixels
-            const maxOffset = 10;
-            
-            // Calculate shadow position (pushed away from cursor to act as light source)
-            const shadowX = -((dx / (rect.width / 2)) * maxOffset);
-            const shadowY = -((dy / (rect.height / 2)) * maxOffset);
-            
-            htmlTile.style.setProperty('--x-shadow', `${shadowX.toFixed(1)}px`);
-            htmlTile.style.setProperty('--y-shadow', `${shadowY.toFixed(1)}px`);
-          });
-          
-          htmlTile.addEventListener('mouseleave', () => {
-            htmlTile.style.removeProperty('--x-shadow');
-            htmlTile.style.removeProperty('--y-shadow');
-          });
-        });
-      };
-
-      /**
-       * Magic Cursor Lens Effects:
-       * Attaches a global mouseover listener to dynamically change the shape of the custom cursor.
-       * - When hovering over buttons or interactive elements, it transforms into a rounded "selector".
-       * - When hovering over text, it acts as a magnifying glass, scaling its size proportionally
-       *   to the `font-size` of the underlying text element.
-       */
       const initLensEffect = () => {
         const cursor = document.getElementById('magic-cursor');
         if (!cursor) return;
@@ -497,8 +314,7 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           const target = e.target as HTMLElement;
           if (!target) return;
 
-          // If hovering inside a button, turn into a selector shape
-          if (target.closest('.neo-btn, .neo-social-btn, button')) {
+          if (target.closest('.neo-btn, button, a')) {
             cursor.classList.remove('lens-active');
             cursor.classList.add('selector-active');
             return;
@@ -506,18 +322,8 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
             cursor.classList.remove('selector-active');
           }
           
-          // Target all standard text elements + any div containing plain text metadata
-          const isTextElement = target.closest('h1, h2, h3, h4, h5, h6, p, span, li, a, strong, em, .font-mono div, .footer-inner');
-          
+          const isTextElement = target.closest('h1, h2, h3, h4, h5, h6, p, span, li, strong, em');
           if (isTextElement) {
-            // Dynamically scale looking glass based on font size
-            const style = window.getComputedStyle(isTextElement as Element);
-            const fontSize = parseFloat(style.fontSize) || 16;
-            
-            // Refined ratio: 16px text -> 60px lens, 48px text -> 120px lens
-            const lensSize = Math.min(Math.max(60, fontSize * 2.5), 150);
-            
-            cursor.style.setProperty('--lens-size', `${lensSize}px`);
             cursor.classList.add('lens-active');
           } else {
             cursor.classList.remove('lens-active');
@@ -525,12 +331,6 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
         });
       };
 
-      /**
-       * Contact Modal Logic:
-       * Handles opening and closing the sticky note contact modal appended to the footer.
-       * When opening, it temporarily moves the `#magic-cursor` inside the `<dialog>` element
-       * to bypass the browser's top-layer isolation, ensuring the custom cursor remains visible over the modal.
-       */
       const initContactModal = () => {
         const trigger = document.getElementById('footer-contact-trigger');
         const modal = document.getElementById('contact-modal') as HTMLDialogElement | null;
@@ -541,489 +341,48 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
 
         if (!modal || !trigger) return;
 
-        trigger.addEventListener('click', () => {
+        const showModal = () => {
+          modal.style.display = 'block';
           modal.showModal();
           if (magicCursor) modal.appendChild(magicCursor);
-          document.body.style.overflow = 'hidden'; // prevent scrolling behind
-        });
-
-        const closeModal = () => {
-          modal.close();
+          document.body.style.overflow = 'hidden';
         };
 
-        modal.addEventListener('close', () => {
+        const closeModal = () => {
+          modal.style.display = 'none';
+          modal.close();
           if (magicCursor) document.body.appendChild(magicCursor);
           document.body.style.overflow = '';
-        });
+        };
 
+        trigger.addEventListener('click', showModal);
         closeBtn?.addEventListener('click', closeModal);
 
-        // Close on clicking outside the sticky note (the backdrop)
         modal.addEventListener('click', (e) => {
-          const rect = modal.getBoundingClientRect();
-          const isInDialog = (
-            e.clientX >= rect.left &&
-            e.clientX <= rect.right &&
-            e.clientY >= rect.top &&
-            e.clientY <= rect.bottom
-          );
-          const clickedOnStickyNote = (e.target as HTMLElement).closest('.sticky-note-modal');
-          if (!isInDialog || !clickedOnStickyNote) {
-            closeModal();
-          }
+          if (e.target === modal) closeModal();
         });
 
-        // Copy Email logic
         copyBtn?.addEventListener('click', () => {
           if (!emailLink) return;
-          const email = emailLink.textContent || 'academicayan2022@gmail.com';
+          const email = emailLink.textContent || 'suryaraghuramg@gmail.com';
           navigator.clipboard.writeText(email).then(() => {
             if (copyText) {
               copyText.textContent = 'COPIED!';
-              setTimeout(() => {
-                copyText.textContent = 'COPY';
-              }, 2000);
+              setTimeout(() => { copyText.textContent = 'COPY'; }, 2000);
             }
-          }).catch(err => {
-            console.error('Failed to copy email: ', err);
           });
         });
       };
 
-      // Dark Mode Toggle Logic
-      const initDarkModeToggle = () => {
-        const toggleBtn = document.getElementById('dark-toggle');
-        const sunIcon = document.getElementById('theme-icon-sun');
-        const moonIcon = document.getElementById('theme-icon-moon');
-        const metaThemeColor = document.getElementById('theme-color-meta');
-
-        const updateUI = (isDark) => {
-          if (isDark) {
-            sunIcon?.classList.remove('hidden');
-            moonIcon?.classList.add('hidden');
-            if (metaThemeColor) metaThemeColor.setAttribute('content', '#1a1a1a');
-          } else {
-            sunIcon?.classList.add('hidden');
-            moonIcon?.classList.remove('hidden');
-            if (metaThemeColor) metaThemeColor.setAttribute('content', '#ffffff');
-          }
-        };
-
-        // Initial sync with DOM state set by anti-FOUC script
-        const isCurrentlyDark = document.documentElement.classList.contains('dark');
-        updateUI(isCurrentlyDark);
-
-        toggleBtn?.addEventListener('click', () => {
-          const isDark = document.documentElement.classList.toggle('dark');
-          localStorage.setItem('theme', isDark ? 'dark' : 'light');
-          updateUI(isDark);
-        });
-      };
-
-      /**
-       * Blog Notification Dot Logic:
-       * Shows a green dot on the BLOG nav button when there's a new blog post
-       * the user hasn't seen yet. Tracks seen state via localStorage key 'blog_last_seen'.
-       * Dot disappears once the user visits /blog, and reappears for future new posts.
-       */
-      const initBlogNotifDot = () => {
-        const blogLink = document.getElementById('nav-blog') as HTMLAnchorElement | null;
-        const dot = document.getElementById('blog-notif-dot');
-        if (!blogLink || !dot) return;
-
-        const latestId = blogLink.dataset.latestBlog || '';
-        if (!latestId) return;
-
-        const seenId = localStorage.getItem('blog_last_seen');
-
-        // Show dot if user has never visited blog OR if there's a new post since last visit
-        if (seenId !== latestId) {
-          dot.classList.add('dot-visible');
-        }
-
-        // If currently on /blog, mark the latest post as seen
-        if (window.location.pathname === '/blog' || window.location.pathname === '/blog/') {
-          localStorage.setItem('blog_last_seen', latestId);
-          dot.classList.remove('dot-visible');
-        }
-      };
-
-      // Run on initialization
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-          initDynamicShadows();
           initLensEffect();
-          initDarkModeToggle();
           initContactModal();
-          initBlogNotifDot();
         });
       } else {
-        initDynamicShadows();
         initLensEffect();
-        initDarkModeToggle();
         initContactModal();
-        initBlogNotifDot();
       }
     </script>
   </body>
 </html>
-
-<style>
-  /* --- Navigation --- */
-  .site-nav {
-    background-color: var(--color-main);
-    border-bottom: var(--border-width) solid var(--color-fg);
-    padding: 1.25rem clamp(1.5rem, 5vw, 4rem);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .site-nav.nav-at-bottom {
-    background-color: var(--color-pink) !important;
-    border-bottom-color: var(--color-pink) !important;
-  }
-
-  .nav-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 2rem;
-    max-width: var(--container-max);
-    margin: 0 auto;
-  }
-
-  .nav-brand-group {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .nav-socials {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .neo-social-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    background-color: var(--color-main);
-    border: var(--border-width) solid var(--color-fg);
-    box-shadow: 3px 3px 0px 0px var(--box-shadow-color);
-    color: var(--color-fg);
-    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.25s ease;
-  }
-
-  .neo-social-btn:hover {
-    transform: translate(3px, 3px);
-    box-shadow: 0px 0px 0px 0px var(--box-shadow-color);
-  }
-
-  #header-github:hover {
-    background-color: var(--color-fg);
-    color: var(--color-main);
-  }
-
-  #header-twitter:hover {
-    background-color: var(--color-fg);
-    color: var(--color-main);
-  }
-
-  #dark-toggle {
-    background-color: #ffc300 !important;
-    color: #111111 !important;
-    border-color: var(--color-fg) !important;
-    box-shadow: 3px 3px 0px 0px var(--box-shadow-color) !important;
-  }
-
-  #dark-toggle:hover {
-    background-color: #e0ab00 !important;
-    transform: translate(3px, 3px);
-    box-shadow: 0px 0px 0px 0px var(--box-shadow-color) !important;
-  }
-
-  #header-linkedin:hover {
-    background-color: #74c0fc; /* Premium light blue */
-    color: var(--color-fg);
-  }
-
-  .social-icon {
-    display: block;
-    width: 18px;
-    height: 18px;
-  }
-
-  .social-icon.hidden {
-    display: none !important;
-  }
-
-  .nav-brand {
-    font-family: var(--font-heading);
-    font-size: 1.25rem;
-    font-weight: 900;
-    color: var(--color-fg);
-    text-decoration: none;
-    letter-spacing: -0.02em;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    list-style: none;
-    gap: 1rem;
-    margin: 0;
-    padding: 0;
-  }
-
-  .main-wrapper {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
-  }
-
-  /* --- Footer --- */
-  .site-footer {
-    background-color: var(--color-main);
-    border-top: var(--border-width) solid var(--color-fg);
-    padding: 2rem clamp(1.5rem, 5vw, 4rem);
-    margin-top: 4rem;
-  }
-
-  .footer-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: var(--container-max);
-    margin: 0 auto;
-    font-size: 0.875rem;
-  }
-
-  .footer-tagline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  /* --- Responsive --- */
-  @media (max-width: 640px) {
-    .nav-inner {
-      flex-direction: column;
-      gap: 1rem;
-    }
-
-    .footer-inner {
-      flex-direction: column;
-      gap: 1.25rem;
-      text-align: center;
-    }
-
-    .footer-tagline {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.50rem;
-    }
-  }
-
-  /* --- Contact Modal & Sticky Note --- */
-  .neo-modal-dialog {
-    border: none;
-    background: transparent;
-    padding: 0;
-    max-width: none;
-    max-height: none;
-    overflow: visible;
-    margin: auto;
-  }
-
-  .neo-modal-dialog::backdrop {
-    background-color: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-  }
-
-  .sticky-note-modal {
-    position: relative;
-    background-color: #fef08a; /* classic sticky note yellow */
-    border: var(--border-width) solid var(--color-fg);
-    box-shadow: 10px 10px 0 0 rgba(0, 0, 0, 0.3);
-    padding: 3rem 2rem 2.5rem;
-    width: 90vw;
-    max-width: 420px;
-    color: #111111;
-    transform: rotate(-1deg);
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease;
-  }
-
-  .sticky-note-modal:hover {
-    transform: rotate(0deg) scale(1.02);
-    box-shadow: 14px 14px 0 0 rgba(0, 0, 0, 0.35);
-  }
-
-  /* Modal Masking Tape */
-  .sticky-note-modal .sticky-tape {
-    position: absolute;
-    top: -14px;
-    left: 50%;
-    transform: translateX(-50%) rotate(1deg);
-    width: 90px;
-    height: 28px;
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1.5px solid rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(2px);
-    z-index: 12;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.15);
-  }
-
-  /* Close Button styled like a small pin or tag */
-  .modal-close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #ff7a59; /* terracotta red */
-    color: #ffffff;
-    border: 2px solid var(--color-fg);
-    font-size: 1.25rem;
-    font-weight: bold;
-    width: 28px;
-    height: 28px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 2px 2px 0px 0px var(--box-shadow-color);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-  }
-
-  .modal-close-btn:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px 0px var(--box-shadow-color);
-  }
-
-  .sticky-modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px dashed rgba(0,0,0,0.2);
-  }
-
-  .sticky-date {
-    font-size: 0.85rem;
-    font-weight: 800;
-  }
-
-  .sticky-mood {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: rgba(255,255,255,0.4);
-    border: 1.5px solid rgba(0,0,0,0.4);
-    padding: 0.15em 0.5em;
-  }
-
-  .sticky-modal-text {
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.5;
-  }
-
-  .contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .contact-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-
-  .contact-label {
-    font-size: 0.75rem;
-    font-weight: 800;
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  .email-container,
-  .phone-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #ffffff;
-    padding: 0.5rem 0.75rem;
-    font-size: 0.85rem;
-    border: 2px solid var(--color-fg);
-  }
-
-  .email-link,
-  .phone-link {
-    color: #111111;
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-
-  .copy-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    background-color: var(--color-cyan);
-    border: 1.5px solid var(--color-fg);
-    padding: 0.15rem 0.4rem;
-    font-size: 0.65rem;
-    font-weight: 800;
-    box-shadow: 2px 2px 0px 0px var(--box-shadow-color);
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-  }
-
-  .copy-btn:hover {
-    transform: translate(2px, 2px);
-    box-shadow: 0px 0px 0px 0px var(--box-shadow-color);
-  }
-
-  .copy-icon {
-    width: 12px;
-    height: 12px;
-  }
-
-  #scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background-color: var(--color-pink);
-    width: 0%;
-    z-index: 150;
-    transition: width 0.05s ease-out;
-  }
-
-  /* ── Blog notification dot ── */
-  .nav-link-item {
-    position: relative;
-  }
-
-  .blog-notif-dot {
-    display: none;
-    position: absolute;
-    top: -6px;
-    right: -6px;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background-color: var(--color-cyan);
-    border: 2px solid var(--color-main);
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .blog-notif-dot.dot-visible {
-    display: block;
-  }
-</style>

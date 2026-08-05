@@ -4,155 +4,132 @@ import "../styles/global.css";
 
 const featuredProjects = [
   {
-    title: "Plan & Learn",
-    category: "Internship Project",
-    timeframe: "Jul 2026",
-    description: "An AI-powered mobile curriculum engine that instantly generates structured, step-by-step learning roadmaps for any topic. Engineered with a local-first C++ storage architecture for zero-lag performance, wrapped in a striking neobrutalist design system that prioritizes accessible UI and sharp typography.",
-    techStack: ["React Native", "Expo", "Hono", "Cloudflare Workers", "Vercel AI SDK", "Zustand", "MMKV"],
+    title: "MergeLens",
+    category: "Autonomous AI Code Review",
+    timeframe: "Project",
+    description: "Architected an AI-powered pull request review platform that analyzes GitHub PRs using a multi-agent LangGraph workflow. Built a high-performance native C++ static analysis engine leveraging Tree-sitter to extract AST structures, significantly reducing LLM token usage while improving review accuracy. Developed a Flutter web dashboard with Supabase-backed real-time monitoring.",
+    techStack: ["Python", "FastAPI", "LangGraph", "C++", "Flutter", "Redis"],
     links: [
-      { text: "Source Code", url: "https://github.com/RickyTheDude/Planner" },
-      { text: "Try", url: "https://rickythedude.github.io/Planner-lander/" },
-      { text: "Watch Video", url: "https://www.youtube.com/watch?v=B8GD4rjf-AA" }
+      { text: "Live Demo", url: "#" }
     ],
   },
   {
-    title: "Regulated Digital Access Tokens",
-    category: "Project",
-    timeframe: "Apr 2026",
-    description: "This project is a Proof-of-Concept deployed on the Sepolia testnet designed for creators who want absolute cryptographic control over asset resales. I built the application to guide users through minting tokens and interacting with an internal, restricted marketplace while keeping the interface transparent and smooth. It serves as a functional demonstration that we can completely disable standard ERC-721 open-market transfers and force custom economic rules directly at the smart contract layer.",
-    techStack: ["React + Vite", "Tailwind CSS", "Ethers.js", "Solidity"],
+    title: "Filey",
+    category: "Custom Binary File Format",
+    timeframe: "Project",
+    description: "Designed a custom C++ binary file format for a graph-structured mind map and published the package on the Arch User Repository (AUR). Built a cross-platform visual editor using Flutter to provide intuitive file interaction, ensuring data integrity through real-time rendering logic.",
+    techStack: ["C++", "Flutter", "Docker"],
     links: [
-      { text: "Live App", url: "https://regulated-digital-access-tokens.github.io/regulated-digital-access-tokens/" },
-      { text: "Source Code", url: "https://github.com/Regulated-Digital-Access-Tokens/regulated-digital-access-tokens" }
+      { text: "Live Demo", url: "#" }
     ],
   },
   {
-    title: "Secure File Vault",
-    category: "Project",
-    timeframe: "Sep 2025",
-    description: "A full-stack secure file storage application prioritizing end-to-end encryption and zero-knowledge architecture. Built with a modern React and Tailwind CSS interface, the system encrypts all files client-side using a hybrid RSA and AES-GCM cryptographic implementation, ensuring the server never stores unencrypted data or private keys.",
-    techStack: ["React + Vite", "Tailwind CSS", "Node.js + Express", "Web Crypto API", "LevelDB"],
+    title: "Cricdle",
+    category: "Cricketer Guessing Game",
+    timeframe: "Project",
+    description: "Architected a high-traffic cricket guessing game, managing a dynamic database of 3,000+ ESPN player profiles for instant, accurate validation. Implemented a hybrid caching strategy to ensure sub-millisecond response times, efficiently integrating external APIs to minimize latency and load overhead.",
+    techStack: ["JavaScript", "Node.js", "Express", "Docker"],
     links: [
-      { text: "Live App", url: "https://secure-file-vault-7o4.pages.dev" },
-      { text: "Source Code", url: "https://github.com/Niketw/secure-file-vault" }
+      { text: "Live Demo", url: "#" }
     ],
   },
   {
-    title: "ProBono - Privacy Policy Ratings",
-    category: "Hackathon Project",
-    timeframe: "Nov 2025",
-    description:
-      "Browser extension and ranking platform concept built during the Eudia x IIITA Hackathon to evaluate and compare privacy policies of online services. The project remains unfinished but represents an exploration of consumer privacy and transparency.",
+    title: "LinuxProxy",
+    category: "System Tool",
+    timeframe: "Project",
+    description: "Automated system-wide proxy configuration on Linux using Bash, reducing manual setup across terminal-based tools. Configured environment variables and default CLI utilities to ensure consistent network behavior across applications.",
+    techStack: ["Bash", "Linux"],
     links: [
-      { text: "Watch Demo", url: "https://www.youtube.com/watch?v=iGLOO0mdA08" }
+      { text: "GitHub", url: "#" }
     ],
   },
+  {
+    title: "Attend",
+    category: "QR-Based Attendance Platform",
+    timeframe: "Project",
+    description: "Developed a Flutter-based attendance application enabling teachers to manage classes and generate QR codes. Implemented QR-based student check-ins with Firestore-backed storage for real-time attendance recording.",
+    techStack: ["Flutter", "Firebase", "Firestore"],
+    links: [
+      { text: "GitHub", url: "#" }
+    ],
+  }
 ];
 
-const communityWork = [
+const achievements = [
   {
-    title: "Road Object-Detection on Edge Devices",
-    category: "Research",
-    timeframe: "Aug 2025 - Ongoing",
-    description:
-      "Ongoing undergraduate research project under Dr. Navjot Singh involving road object detection in tricky conditions like rainy-nights on edge-devices like the NVIDIA Jetson Nano 4GB",
-    link: null,
+    title: "Competitive Programming",
+    category: "Contests",
+    items: [
+      "Secured Rank 8 in the CodeRed Finals at Aproksha '26 (500+ participants).",
+      "Secured Rank 190 in Codeforces Round 1081 (Div. 2) (13,000+ participants).",
+      "Secured Rank 695 in Pinely Round 5 (Div. 2) (8,500+ participants)."
+    ]
   },
   {
-    title: "FreshHat Learning Repository",
-    category: "Open-Source",
-    timeframe: "Dec 2025",
-    description:
-      "Maintained repository as a mentor during Opencode 24' to teach and evaluate cybersecurity concepts.",
-    link: "https://github.com/opencodeiiita/FreshHat-Learning-Repository",
+    title: "Problem Solving",
+    category: "Algorithms",
+    items: [
+      "Solved 400+ algorithmic problems across LeetCode and Codeforces.",
+      "Focus on data structures and competitive programming patterns."
+    ]
   },
   {
-    title: "Cybergeek CTF",
-    category: "Challenge Author",
-    timeframe: "2025 and 2026",
-    description:
-      "Authored problems for a high-octane Jeopardy-style CTF competition.",
-    link: "https://cybergeek.ctf7.com/",
-  },
-  {
-    title: "Linux Workshops & Mentorship",
-    category: "Community",
-    timeframe: "2025",
-    description:
-      "Mentored IIIT-A freshmen in cybersecurity and conducted Linux workshops introducing students to Linux fundamentals and security concepts.",
-    link: null,
-  },
+    title: "Project Management",
+    category: "Leadership",
+    items: [
+      "Led development and version control for a cross-platform Flutter application during OpenCode '25.",
+      "Reviewed 130+ pull requests and coordinated contributions from multiple developers using GitHub."
+    ]
+  }
 ];
 ---
 
-<Layout title="Ayan Mahata — Work">
+<Layout title="Surya Raghuram — Work">
   <section class="max-w-5xl mx-auto mt-8 px-4 md:px-8 pb-8">
     
     <!-- Hero / Title -->
-    <div class="mb-16 border-b-4 border-[var(--color-fg)] pb-8">
-      <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight text-[var(--color-fg)] leading-none mb-6">
+    <div class="mb-16 border-b border-white/10 pb-8 fade-in">
+      <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight text-white leading-none mb-6">
         MY WORK.
       </h1>
-      <p class="font-mono text-lg md:text-xl text-[var(--color-fg)] opacity-80 max-w-2xl leading-relaxed">
-A few things I've spent way too much time thinking about.      </p>
+      <p class="font-mono text-lg md:text-xl text-white/60 max-w-2xl leading-relaxed">
+        Building high-performance tools, autonomous systems, and full-stack applications.
+      </p>
     </div>
 
     <!-- Projects Section -->
-    <div class="mb-24">
-      <div class="mb-12 relative flex flex-row items-center justify-between w-full gap-4">
-        <div class="relative w-fit max-w-full">
-          <div class="absolute inset-0 bg-[var(--color-pink)] translate-x-2 translate-y-2 border-2 border-[var(--color-fg)]"></div>
-          <h2 class="relative text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight bg-[var(--color-main)] text-[var(--color-fg)] px-4 sm:px-8 py-2 sm:py-3 border-4 border-[var(--color-fg)]">
-            Projects
-          </h2>
-        </div>
-        
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-          <div id="projects-flip-wrapper" class="relative opacity-0 pointer-events-none scale-0 flex items-center justify-center z-20">
-            <button id="projects-flip-card-btn" class="relative w-12 h-12 md:w-auto md:h-14 md:px-6 rounded-full bg-[var(--color-cyan)] border-4 border-[var(--color-fg)] shadow-[4px_4px_0_0_var(--color-fg)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-200 flex items-center justify-center cursor-none font-mono font-bold text-xs md:text-sm uppercase text-[var(--color-fg)]" aria-label="Next Card">
-              <span class="hidden md:inline">Next</span> 
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[var(--color-fg)] rotate-90 md:ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-              </svg>
-            </button>
-          </div>
-
-          <button id="projects-stack-toggle" class="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--color-yellow)] border-4 border-[var(--color-fg)] shadow-[4px_4px_0_0_var(--color-fg)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center z-20 group cursor-none" aria-label="Toggle Stack">
-            <svg id="projects-icon-toggle" class="w-6 h-6 text-[var(--color-fg)] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-               <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
-        </div>
+    <div class="mb-24 fade-in" style="animation-delay: 0.1s;">
+      <div class="mb-12 flex items-center gap-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-white flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 16L12 22L22 16M2 12L12 18L22 12M2 8L12 14L22 8L12 2L2 8Z"></path></svg>
+          PROJECTS
+        </h2>
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-[var(--color-cyan)]/50 to-transparent"></div>
       </div>
 
-      <div class="flex flex-col gap-10 w-full" id="projects-stack">
+      <div class="grid grid-cols-1 gap-8">
         {
           featuredProjects.map((item) => (
-            <article class="neo-panel bg-[var(--color-main)] p-8 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-12 shadow-[8px_8px_0_0_var(--color-fg)]">
+            <article class="neo-panel p-8 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-12 group">
               
               <!-- Left Column: Title, Tags & Tech Stack -->
               <div class="lg:w-2/5 flex flex-col gap-4">
                 <div class="flex flex-wrap gap-2 mb-2">
-                  <span class="font-mono text-xs font-bold bg-[var(--color-yellow)] text-[var(--color-bg)] px-3 py-1.5 border-2 border-[var(--color-fg)]">
+                  <span class="neo-tag neo-tag--cyan">
                     {item.category}
                   </span>
-                  {item.achievement && (
-                    <span class="font-mono text-xs font-bold bg-[var(--color-pink)] text-[var(--color-bg)] px-3 py-1.5 border-2 border-[var(--color-fg)]">
-                      {item.achievement}
-                    </span>
-                  )}
-                  <span class="font-mono text-xs font-bold bg-[var(--color-bg)] text-[var(--color-fg)] px-3 py-1.5 border-2 border-[var(--color-fg)]">
+                  <span class="neo-tag neo-tag--pink">
                     {item.timeframe}
                   </span>
                 </div>
-                <h3 class="text-3xl md:text-4xl font-black tracking-tight text-[var(--color-fg)] leading-tight break-words">
+                <h3 class="text-3xl md:text-4xl font-black tracking-tight text-white leading-tight group-hover:text-[var(--color-cyan)] transition-colors">
                   {item.title}
                 </h3>
 
                 {item.techStack && (
                   <div class="flex flex-wrap gap-2 mt-4 mb-2">
                     {item.techStack.map((tech) => (
-                      <span class="font-mono text-[10px] font-bold text-[var(--color-fg)] px-2 py-1 border border-[var(--color-fg)] opacity-70 uppercase">
+                      <span class="font-mono text-[10px] font-bold text-white/70 px-2 py-1 bg-white/5 border border-white/10 rounded uppercase">
                         {tech}
                       </span>
                     ))}
@@ -162,36 +139,25 @@ A few things I've spent way too much time thinking about.      </p>
 
               <!-- Right Column: Content & Links -->
               <div class="lg:w-3/5 flex flex-col justify-between">
-                <p class="font-mono text-base md:text-lg leading-relaxed text-[var(--color-fg)] opacity-90">
+                <p class="font-mono text-base md:text-lg leading-relaxed text-white/70">
                   {item.description}
                 </p>
                 {item.links && item.links.length > 0 && (
-                  <div class="flex flex-wrap gap-4 mt-6">
+                  <div class="flex flex-wrap gap-4 mt-8">
                     {item.links.map(link => (
                       <a
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class={`inline-flex items-center gap-2 font-mono text-sm font-bold bg-[var(--color-main)] border-2 border-[var(--color-fg)] px-5 py-2.5 shadow-[4px_4px_0_0_var(--color-fg)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-200 text-[var(--color-fg)] uppercase ${
-                          link.text.toLowerCase().includes('code') || link.text.toLowerCase().includes('github')
-                            ? 'hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)]'
-                            : link.text.toLowerCase().includes('demo') || link.text.toLowerCase().includes('video')
-                            ? 'hover:bg-[#ff0000] hover:text-white'
-                            : 'hover:bg-[var(--color-cyan)] hover:text-[var(--color-bg)]'
-                        }`}
+                        class="neo-btn text-xs px-5 py-2.5 flex items-center gap-2"
                       >
                         {link.text}
-                        {link.text.toLowerCase().includes('code') || link.text.toLowerCase().includes('github') ? (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        {link.text.toLowerCase().includes('github') ? (
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
                           </svg>
-                        ) : link.text.toLowerCase().includes('demo') || link.text.toLowerCase().includes('video') ? (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
-                          </svg>
                         ) : (
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                             <polyline points="15 3 21 3 21 9" />
                             <line x1="10" y1="14" x2="21" y2="3" />
@@ -209,635 +175,32 @@ A few things I've spent way too much time thinking about.      </p>
       </div>
     </div>
 
-    <!-- Community & Research Section -->
-    <div>
-      <div class="mb-12 relative flex flex-row items-center justify-between w-full gap-4">
-        <div class="relative w-fit max-w-full">
-          <div class="absolute inset-0 bg-[var(--color-yellow)] translate-x-2 translate-y-2 border-2 border-[var(--color-fg)]"></div>
-          <h2 class="relative text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight bg-[var(--color-main)] text-[var(--color-fg)] px-4 sm:px-8 py-2 sm:py-3 border-4 border-[var(--color-fg)]">
-            Community & Research
-          </h2>
-        </div>
-        
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-          <div id="community-flip-wrapper" class="relative opacity-0 pointer-events-none scale-0 flex items-center justify-center z-20">
-            <button id="flip-card-btn" class="relative w-12 h-12 md:w-auto md:h-14 md:px-6 rounded-full bg-[var(--color-cyan)] border-4 border-[var(--color-fg)] shadow-[4px_4px_0_0_var(--color-fg)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-200 flex items-center justify-center cursor-none font-mono font-bold text-xs md:text-sm uppercase text-[var(--color-fg)]" aria-label="Next Card">
-              <span class="hidden md:inline">Next</span> 
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[var(--color-fg)] rotate-90 md:ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-              </svg>
-            </button>
-          </div>
-
-          <button id="stack-toggle" class="relative w-12 h-12 md:w-14 md:h-14 rounded-full bg-[var(--color-pink)] border-4 border-[var(--color-fg)] shadow-[4px_4px_0_0_var(--color-fg)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] flex items-center justify-center z-20 group cursor-none" aria-label="Toggle Stack">
-            <svg id="icon-toggle" class="w-6 h-6 text-[var(--color-fg)] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:scale-110" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-               <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7" />
-            </svg>
-          </button>
-        </div>
+    <!-- Achievements Section -->
+    <div class="fade-in" style="animation-delay: 0.2s;">
+      <div class="mb-12 flex items-center gap-4">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-white flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+          ACHIEVEMENTS
+        </h2>
+        <div class="h-[1px] flex-1 bg-gradient-to-r from-[var(--color-purple)]/50 to-transparent"></div>
       </div>
 
-      <div class="flex flex-col gap-8 w-full" id="community-stack">
-        
-        <!-- YOLO26n Research -->
-        <article class="neo-panel bg-[var(--color-main)] p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[6px_6px_0_0_var(--color-fg)] items-start">
-          <div class="md:w-1/3 flex flex-col gap-3">
-            <div class="flex flex-wrap gap-2">
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-cyan)] text-[var(--color-bg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[0].category}</span>
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-bg)] text-[var(--color-fg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[0].timeframe}</span>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+        {achievements.map(ach => (
+          <article class="neo-panel p-6 flex flex-col gap-4 group">
+            <div class="flex items-start justify-between">
+              <h3 class="text-xl font-black text-white group-hover:text-[var(--color-purple)] transition-colors">{ach.title}</h3>
+              <span class="neo-tag neo-tag--purple text-[10px] bg-white/5 border-white/10 text-[var(--color-purple)] px-2 py-0.5">{ach.category}</span>
             </div>
-            <h3 class="text-xl md:text-2xl font-black tracking-tight text-[var(--color-fg)] leading-tight break-words">{communityWork[0].title}</h3>
-          </div>
-          <div class="md:w-2/3">
-            <p class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-fg)] opacity-90">
-              {communityWork[0].description}
-            </p>
-          </div>
-        </article>
-
-        <!-- FreshHat Learning Repository -->
-        <article class="neo-panel bg-[var(--color-main)] p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[6px_6px_0_0_var(--color-fg)] items-start relative overflow-hidden">
-          <!-- Decorative code/dots background -->
-          <div class="absolute inset-0 opacity-[0.04] pointer-events-none" style="background-image: radial-gradient(var(--color-fg) 2px, transparent 2px); background-size: 20px 20px;"></div>
-          
-          <div class="md:w-1/3 flex flex-col gap-3 relative z-10">
-            <div class="flex flex-wrap gap-2">
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-main)] text-[var(--color-fg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[1].category}</span>
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-fg)] text-[var(--color-bg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[1].timeframe}</span>
-            </div>
-            <h3 class="text-xl md:text-2xl font-black tracking-tight text-[var(--color-fg)] leading-tight break-words">{communityWork[1].title}</h3>
-          </div>
-          
-          <div class="md:w-2/3 relative z-10 flex flex-col">
-            <p class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-fg)] opacity-90 mb-5">
-              {communityWork[1].description}
-            </p>
-            
-            <div class="flex flex-col sm:flex-row sm:items-center gap-4 justify-between mt-auto border-t-2 border-[var(--color-fg)] border-opacity-20 pt-4">
-              <!-- Repo Stats -->
-              <div class="flex flex-wrap gap-2">
-                <span class="font-mono text-[10px] font-bold bg-[var(--color-main)] text-[var(--color-fg)] px-2 py-1 border-2 border-[var(--color-fg)] shadow-[2px_2px_0_0_var(--color-fg)] flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18v-5"></path><path d="M12 13a4 4 0 0 0-4-4H5"></path><path d="M12 13a4 4 0 0 1 4-4h3"></path><circle cx="5" cy="5" r="4"></circle><circle cx="19" cy="5" r="4"></circle><circle cx="12" cy="21" r="4"></circle></svg>
-                  55 FORKS
-                </span>
-                <span class="font-mono text-[10px] font-bold bg-[var(--color-yellow)] text-[var(--color-bg)] px-2 py-1 border-2 border-[var(--color-fg)] shadow-[2px_2px_0_0_var(--color-fg)] flex items-center gap-1.5">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-                  4 STARS
-                </span>
-              </div>
-              
-              <a href={communityWork[1].link} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 font-mono text-[10px] font-bold bg-[var(--color-main)] border-2 border-[var(--color-fg)] px-3 py-1.5 shadow-[2px_2px_0_0_var(--color-fg)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all text-[var(--color-fg)] uppercase">
-                View Repository <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Cybergeek CTF -->
-        <article class="neo-panel bg-[var(--color-main)] p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[6px_6px_0_0_var(--color-fg)] items-start relative overflow-hidden">
-          <div class="absolute inset-0 opacity-[0.03] pointer-events-none" style="background-image: radial-gradient(var(--color-fg) 1.5px, transparent 1.5px); background-size: 16px 16px;"></div>
-          
-          <div class="md:w-1/3 flex flex-col gap-3 relative z-10">
-            <div class="flex flex-wrap justify-between items-start">
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-pink)] text-[var(--color-bg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[2].category}</span>
-              <a href={communityWork[2].link} target="_blank" rel="noopener noreferrer" class="opacity-40 hover:opacity-100 transition-opacity" aria-label="Visit Cybergeek CTF">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-              </a>
-            </div>
-            <h3 class="text-xl md:text-2xl font-black tracking-tight text-[var(--color-fg)] leading-tight break-words">{communityWork[2].title}</h3>
-          </div>
-          
-          <div class="md:w-2/3 relative z-10 flex flex-col">
-            <p class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-fg)] opacity-90 mb-4">
-              {communityWork[2].description}
-            </p>
-            <div class="flex flex-wrap gap-1.5 mt-auto">
-              <span class="font-mono text-[9px] font-bold bg-[var(--color-bg)] text-[var(--color-fg)] px-1.5 py-0.5 border border-[var(--color-fg)]">403 PLAYERS</span>
-              <span class="font-mono text-[9px] font-bold bg-[var(--color-bg)] text-[var(--color-fg)] px-1.5 py-0.5 border border-[var(--color-fg)]">46 CHALLENGES</span>
-              <span class="font-mono text-[9px] font-bold bg-[var(--color-bg)] text-[var(--color-fg)] px-1.5 py-0.5 border border-[var(--color-fg)]">CTF</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Linux Workshops & Mentorship -->
-        <article class="neo-panel bg-[var(--color-main)] p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-10 shadow-[6px_6px_0_0_var(--color-fg)] items-start">
-          <div class="md:w-1/3 flex flex-col gap-3">
-            <div class="flex flex-wrap gap-2">
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-yellow)] text-[var(--color-bg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[3].category}</span>
-              <span class="font-mono text-[10px] font-bold bg-[var(--color-fg)] text-[var(--color-bg)] px-2 py-1 border-2 border-[var(--color-fg)] uppercase">{communityWork[3].timeframe}</span>
-            </div>
-            <h3 class="text-xl md:text-2xl font-black tracking-tight text-[var(--color-fg)] leading-tight break-words">{communityWork[3].title}</h3>
-          </div>
-          <div class="md:w-2/3">
-            <p class="font-mono text-sm md:text-base leading-relaxed text-[var(--color-fg)] opacity-90 border-l-4 border-[var(--color-pink)] pl-4 py-1">
-              {communityWork[3].description}
-</p>
-          </div>
-        </article>
-
-      </div>
-    </div>    <!-- Bento Resume Section (Multi-Profile Interactive) -->
-    <div class="mt-20">
-      <div
-        id="resume-bento-card"
-        class="bento-featured-resume"
-      >
-        <!-- big watermark text -->
-        <span class="feat-num font-mono" aria-hidden="true">CV</span>
-
-        <div class="bento-resume-grid flex flex-col md:flex-row items-center justify-between gap-8 md:gap-16 relative z-10 w-full">
-          <!-- Left side content -->
-          <div class="flex-1 flex flex-col justify-center gap-4 md:pl-6">
-            <h2 class="feat-title">Like my work?</h2>
-            <p class="feat-desc font-mono max-w-2xl">Select a profile to view the relevant technical background and professional experiences.</p>
-            
-            <!-- Interactive Selector Tabs -->
-            <div class="flex flex-wrap gap-3 mt-2" id="resume-tabs">
-              <button class="resume-tab active cursor-pointer font-mono text-xs font-bold border-2 border-[var(--color-fg)] bg-[var(--color-pink)] text-[#111111] px-3 py-1 rounded-sm shadow-[2px_2px_0_0_var(--color-fg)] transition-all" data-profile="systems">Systems</button>
-              <button class="resume-tab cursor-pointer font-mono text-xs font-bold border-2 border-[var(--color-fg)] bg-transparent text-[var(--color-fg)] px-3 py-1 rounded-sm hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] transition-all" data-profile="fullstack">Full-stack</button>
-              <button class="resume-tab cursor-pointer font-mono text-xs font-bold border-2 border-[var(--color-fg)] bg-transparent text-[var(--color-fg)] px-3 py-1 rounded-sm hover:bg-[var(--color-fg)] hover:text-[var(--color-bg)] transition-all" data-profile="ml">Mach. Learning</button>
-            </div>
-          </div>
-
-          <!-- Right side mini preview -->
-          <div class="w-full md:w-auto flex justify-center items-center pr-6 md:pr-10">
-            <a id="resume-download-link" href="https://drive.google.com/file/d/1v0L-rI_PvNiQJESLCzsMMBEoXcNPWoGz/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="mini-resume-container flex justify-center items-center py-2 relative cursor-pointer">
-              <!-- Small background decorative sheet for depth -->
-              <div class="absolute w-[180px] h-[240px] bg-[var(--color-main)] border-2 border-[var(--color-fg)] opacity-40 -rotate-3 translate-x-2 translate-y-2 pointer-events-none"></div>
-              
-              <!-- Main mini resume paper -->
-              <div id="mini-resume-page" class="mini-resume-page relative w-[180px] h-[240px] bg-[var(--color-main)] border-2 border-[var(--color-fg)] p-3 flex flex-col gap-3 shadow-[4px_4px_0_0_var(--color-fg)] rotate-2 transition-transform duration-300 pointer-events-none">
-                <!-- Header -->
-                <div class="border-b border-[var(--color-fg)] pb-1.5 flex flex-col gap-0.5">
-                  <div class="h-2 w-16 bg-[var(--color-fg)] rounded-sm"></div>
-                  <div class="h-1 w-24 bg-[var(--color-fg)] opacity-60 rounded-sm"></div>
-                </div>
-                
-                <!-- Section: Experience -->
-                <div class="flex flex-col gap-1.5">
-                  <div class="h-1.5 w-12 bg-[var(--color-fg)] rounded-sm"></div>
-                  <div class="flex flex-col gap-1">
-                    <div class="flex justify-between items-center">
-                      <div class="h-1 w-20 bg-[var(--color-fg)] opacity-60 rounded-sm"></div>
-                      <div class="h-1 w-6 bg-[var(--color-fg)] opacity-40 rounded-sm"></div>
-                    </div>
-                    <div class="h-1 w-28 bg-[var(--color-fg)] opacity-40 rounded-sm"></div>
-                    <div class="h-1 w-24 bg-[var(--color-fg)] opacity-40 rounded-sm"></div>
-                  </div>
-                  <div class="flex flex-col gap-1">
-                    <div class="flex justify-between items-center">
-                      <div class="h-1 w-16 bg-[var(--color-fg)] opacity-60 rounded-sm"></div>
-                      <div class="h-1 w-6 bg-[var(--color-fg)] opacity-40 rounded-sm"></div>
-                    </div>
-                    <div class="h-1 w-28 bg-[var(--color-fg)] opacity-40 rounded-sm"></div>
-                  </div>
-                </div>
-                
-                <!-- Section: Education -->
-                <div class="flex flex-col gap-1.5">
-                  <div class="h-1.5 w-12 bg-[var(--color-fg)] rounded-sm"></div>
-                  <div class="flex flex-col gap-1">
-                    <div class="h-1 w-24 bg-[var(--color-fg)] opacity-60 rounded-sm"></div>
-                    <div class="h-1 w-28 bg-[var(--color-fg)] opacity-40 rounded-sm"></div>
-                  </div>
-                </div>
-                
-                <!-- Mini floating download badge on the preview -->
-                <div id="resume-sticker" class="absolute bottom-2 right-2 bg-[var(--color-pink)] text-[#111111] border-2 border-[var(--color-fg)] font-mono text-[9px] font-black px-1.5 py-0.5 shadow-[2px_2px_0_0_var(--color-fg)] transition-transform duration-200">
-                  SYS
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+            <ul class="font-mono text-sm leading-relaxed text-white/70 space-y-3 list-disc pl-4 mt-2">
+              {ach.items.map(item => (
+                <li>{item}</li>
+              ))}
+            </ul>
+          </article>
+        ))}
       </div>
     </div>
+
   </section>
 </Layout>
-
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    
-    /**
-     * Initializes an interactive card stack.
-     * This function manages the absolute positioning of cards, their dynamic Z-indexes, 
-     * and smooth layout transitions between a "stacked" view and an "expanded" view.
-     * It also sets up the logic for button-based card flipping and native touch/swipe gestures.
-     * 
-     * @param config - Configuration object with DOM element IDs and styling classes.
-     */
-    const initStack = (config: {
-      containerId: string;
-      toggleBtnId: string;
-      flipBtnId: string;
-      flipWrapperId: string;
-      iconId: string;
-      defaultBgClass: string;
-      activeBgClass: string;
-      gapPixels: number;
-    }) => {
-      const stackContainer = document.getElementById(config.containerId);
-      const toggleBtn = document.getElementById(config.toggleBtnId);
-      const flipBtn = document.getElementById(config.flipBtnId);
-      const flipWrapper = document.getElementById(config.flipWrapperId);
-      const icon = document.getElementById(config.iconId);
-      
-      if (!stackContainer || !toggleBtn || !flipBtn) return;
-      
-      const articles = Array.from(stackContainer.querySelectorAll('article')) as HTMLElement[];
-      let isCollapsed = false; 
-      let stackOffset = 0; 
-      let isAnimating = false;
-      
-      stackContainer.classList.remove('flex', 'flex-col', 'gap-8', 'gap-10');
-      stackContainer.style.position = 'relative';
-      stackContainer.style.transition = 'height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      
-      articles.forEach((article, i) => {
-        article.style.position = 'absolute';
-        article.style.top = '0';
-        article.style.left = '0';
-        article.style.width = '100%';
-        article.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease';
-        article.style.zIndex = (articles.length - i).toString();
-        article.style.transformOrigin = 'center center';
-      });
-
-      /**
-       * Core Layout Engine:
-       * Recalculates the position of every card based on the current `stackOffset`.
-       * In the "collapsed" state, it stacks cards with a slight vertical offset and rotation.
-       * In the "expanded" state, it lays them out sequentially, acting as a normal list.
-       */
-      const calculateLayout = () => {
-        let currentTop = 0;
-        const rotations = [-2, 3, -1.5, 2.5]; 
-        
-        const layoutData = articles.map((article, originalIndex) => {
-          const logicalIndex = (originalIndex - stackOffset + articles.length) % articles.length;
-          return { article, logicalIndex };
-        });
-        
-        const sortedData = [...layoutData].sort((a, b) => a.logicalIndex - b.logicalIndex);
-
-        sortedData.forEach(({ article, logicalIndex }) => {
-          if (isCollapsed) {
-            const yOffset = logicalIndex * 6; 
-            article.style.transform = `translateY(${yOffset}px) rotate(${rotations[logicalIndex % rotations.length]}deg)`;
-            article.style.zIndex = (articles.length - logicalIndex).toString();
-          } else {
-            article.style.transform = `translateY(${currentTop}px) rotate(0deg)`;
-            article.style.zIndex = '1';
-            currentTop += article.offsetHeight + config.gapPixels; 
-          }
-        });
-        
-        if (isCollapsed) {
-          let maxStackHeight = 0;
-          sortedData.forEach(({ article, logicalIndex }) => {
-            const cardHeight = article.offsetHeight + (logicalIndex * 6);
-            if (cardHeight > maxStackHeight) {
-              maxStackHeight = cardHeight;
-            }
-          });
-          stackContainer.style.height = `${maxStackHeight}px`;
-        } else {
-          stackContainer.style.height = `${currentTop - config.gapPixels}px`;
-        }
-      };
-
-      setTimeout(calculateLayout, 50);
-      window.addEventListener('resize', calculateLayout);
-
-      /**
-       * Expand/Collapse Toggle Logic:
-       * Switches the stack between the collapsed pile and the expanded list.
-       * Updates the button colors, icon visibility, and triggers a layout recalculation.
-       */
-      toggleBtn.addEventListener('click', () => {
-        if (isAnimating) return;
-        isCollapsed = !isCollapsed;
-        if (isCollapsed) {
-           icon?.classList.add('rotate-180');
-           
-           toggleBtn.classList.remove(config.defaultBgClass);
-           toggleBtn.classList.add(config.activeBgClass);
-
-           if (flipWrapper) {
-             flipWrapper.classList.remove('arcade-pop-out', 'opacity-0', 'pointer-events-none', 'scale-0');
-             flipWrapper.classList.add('arcade-pop-in');
-             flipWrapper.style.pointerEvents = 'auto';
-           }
-        } else {
-           icon?.classList.remove('rotate-180');
-           
-           toggleBtn.classList.remove(config.activeBgClass);
-           toggleBtn.classList.add(config.defaultBgClass);
-
-           if (flipWrapper) {
-             flipWrapper.classList.remove('arcade-pop-in');
-             flipWrapper.classList.add('arcade-pop-out');
-             flipWrapper.style.pointerEvents = 'none';
-             setTimeout(() => {
-               if (!isCollapsed) {
-                 flipWrapper.classList.add('opacity-0', 'scale-0');
-                 flipWrapper.classList.remove('arcade-pop-out');
-               }
-             }, 300);
-           }
-        }
-        calculateLayout();
-      });
-
-      /**
-       * Card Flip Animation Logic:
-       * Animates the top card flying off the stack to the left or right, fades it out,
-       * increments the `stackOffset` to logically push it to the back of the array,
-       * recalculates the layout, and fades it back in at the bottom of the pile.
-       */
-      const flipCard = (direction: 'left' | 'right' = 'right') => {
-        if (!isCollapsed || isAnimating) return;
-        isAnimating = true;
-
-        const topArticleIndex = articles.findIndex((_, i) => (i - stackOffset + articles.length) % articles.length === 0);
-        const topArticle = articles[topArticleIndex];
-        
-        const translateXPct = direction === 'left' ? -40 : 40;
-        const rotateDeg = direction === 'left' ? -15 : 15;
-
-        topArticle.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease';
-        topArticle.style.transform = `translateY(-30px) translateX(${translateXPct}%) rotate(${rotateDeg}deg) scale(1.05)`;
-        topArticle.style.opacity = '0';
-        
-        setTimeout(() => {
-          stackOffset = (stackOffset + 1) % articles.length;
-          topArticle.style.transition = 'none';
-          calculateLayout();
-          
-          setTimeout(() => {
-            topArticle.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease';
-            topArticle.style.opacity = '1';
-            isAnimating = false;
-          }, 50);
-        }, 400); 
-      };
-
-      flipBtn.addEventListener('click', () => flipCard('right'));
-
-      /**
-       * Touch & Swipe Gesture Logic:
-       * Enables native swiping for mobile devices. It actively tracks the X and Y movement
-       * on touch start. During `touchmove`, it evaluates "scroll intent". 
-       * If the user moves vertically, it aborts the swipe logic to allow normal page scrolling.
-       * If they move horizontally, it binds the top card's transform to their finger.
-       * On `touchend`, if the swipe distance exceeds a threshold, it triggers `flipCard()`.
-       */
-      let touchStartX = 0;
-      let touchStartY = 0;
-      let currentX = 0;
-      let isDragging = false;
-      let scrollIntent = 'unknown';
-
-      stackContainer.addEventListener('touchstart', (e) => {
-        if (!isCollapsed || isAnimating) return;
-        touchStartX = e.touches[0].clientX;
-        touchStartY = e.touches[0].clientY;
-        currentX = touchStartX;
-        isDragging = true;
-        scrollIntent = 'unknown';
-      }, { passive: true });
-
-      stackContainer.addEventListener('touchmove', (e) => {
-        if (!isDragging || !isCollapsed || isAnimating) return;
-        
-        currentX = e.touches[0].clientX;
-        const currentY = e.touches[0].clientY;
-        const deltaX = currentX - touchStartX;
-        const deltaY = currentY - touchStartY;
-        
-        if (scrollIntent === 'unknown') {
-          if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 15) {
-            scrollIntent = 'horizontal';
-          } else if (Math.abs(deltaY) > Math.abs(deltaX) && Math.abs(deltaY) > 15) {
-            scrollIntent = 'vertical';
-            isDragging = false;
-            return;
-          }
-        }
-
-        if (scrollIntent === 'horizontal') {
-          const topArticleIndex = articles.findIndex((_, i) => (i - stackOffset + articles.length) % articles.length === 0);
-          const topArticle = articles[topArticleIndex];
-          
-          if (topArticle) {
-            topArticle.style.transition = 'none';
-            const rotations = [-2, 3, -1.5, 2.5]; 
-            const originalRotate = rotations[0];
-            topArticle.style.transform = `translateY(0px) translateX(${deltaX}px) rotate(${originalRotate + deltaX * 0.05}deg)`;
-          }
-        }
-      }, { passive: true });
-
-      stackContainer.addEventListener('touchend', (e) => {
-        if (!isDragging || !isCollapsed || isAnimating) return;
-        isDragging = false;
-        
-        if (scrollIntent === 'horizontal') {
-          const deltaX = currentX - touchStartX;
-          
-          if (Math.abs(deltaX) > 50) {
-            flipCard(deltaX > 0 ? 'right' : 'left');
-          } else {
-            // Snap back
-            const topArticleIndex = articles.findIndex((_, i) => (i - stackOffset + articles.length) % articles.length === 0);
-            const topArticle = articles[topArticleIndex];
-            if (topArticle) {
-              topArticle.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-              calculateLayout();
-            }
-          }
-        }
-      });
-    };
-
-    // Initialize Community Stack
-    initStack({
-      containerId: 'community-stack',
-      toggleBtnId: 'stack-toggle',
-      flipBtnId: 'flip-card-btn',
-      flipWrapperId: 'community-flip-wrapper',
-      iconId: 'icon-toggle',
-      defaultBgClass: 'bg-[var(--color-pink)]',
-      activeBgClass: 'bg-[var(--color-cyan)]',
-      gapPixels: 32 // equivalent to gap-8
-    });
-
-    // Initialize Projects Stack
-    initStack({
-      containerId: 'projects-stack',
-      toggleBtnId: 'projects-stack-toggle',
-      flipBtnId: 'projects-flip-card-btn',
-      flipWrapperId: 'projects-flip-wrapper',
-      iconId: 'projects-icon-toggle',
-      defaultBgClass: 'bg-[var(--color-yellow)]',
-      activeBgClass: 'bg-[var(--color-cyan)]',
-      gapPixels: 40 // equivalent to gap-10
-    });
-    // Resume Selector Logic
-    const resumeTabs = document.querySelectorAll('.resume-tab');
-    const downloadLink = document.getElementById('resume-download-link');
-    const sticker = document.getElementById('resume-sticker');
-
-    const resumeData = {
-      systems: { link: 'https://drive.google.com/file/d/1v0L-rI_PvNiQJESLCzsMMBEoXcNPWoGz/view?usp=sharing', text: 'SYS', color: 'var(--color-pink)' },
-      fullstack: { link: 'https://drive.google.com/file/d/1U_BWuX2PDLczXB4UjeRg39xZb15cKJtP/view?usp=sharing', text: 'FS', color: 'var(--color-blue)' },
-      ml: { link: 'https://drive.google.com/file/d/1HimgDxriM_kK8LJnz61FRr038GV6HsBA/view?usp=sharing', text: 'ML', color: 'var(--color-cyan)' }
-    };
-    
-    resumeTabs.forEach(tab => {
-      tab.addEventListener('click', (e) => {
-        // Prevent click default behavior
-        e.preventDefault();
-        
-        // Remove active styling from all tabs
-        resumeTabs.forEach(t => {
-          t.classList.remove('bg-[var(--color-pink)]', 'bg-[var(--color-cyan)]', 'bg-[var(--color-blue)]', 'text-[#111111]', 'shadow-[2px_2px_0_0_var(--color-fg)]');
-          t.classList.add('bg-transparent', 'text-[var(--color-fg)]');
-        });
-
-        // Add active styling to clicked tab
-        const profile = tab.dataset.profile;
-        tab.classList.remove('bg-transparent', 'text-[var(--color-fg)]');
-        tab.classList.add('text-[#111111]', 'shadow-[2px_2px_0_0_var(--color-fg)]');
-        
-        // Dynamic background color for active tab
-        if (profile === 'systems') tab.classList.add('bg-[var(--color-pink)]');
-        else if (profile === 'fullstack') tab.classList.add('bg-[var(--color-blue)]');
-        else if (profile === 'ml') tab.classList.add('bg-[var(--color-cyan)]');
-
-        // Update current link state & sticker UI
-        const data = resumeData[profile];
-        if (downloadLink) {
-          downloadLink.href = data.link;
-        }
-        
-        if (sticker) {
-          sticker.textContent = data.text;
-          sticker.style.backgroundColor = data.color;
-          // Small pop animation
-          sticker.style.transform = 'scale(1.2)';
-          setTimeout(() => {
-            sticker.style.transform = 'scale(1)';
-          }, 150);
-        }
-      });
-    });
-
-    // Adjust scroll position if arriving with a hash, after stack heights are calculated
-    if (window.location.hash) {
-      setTimeout(() => {
-        const target = document.querySelector(window.location.hash);
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 150);
-    }
-  });
-</script>
-
-<style>
-  .bento-featured-resume {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background-color: var(--color-yellow);
-    border: 3px solid var(--color-fg);
-    box-shadow: 6px 6px 0 0 var(--color-fg);
-    padding: 2rem 2rem 1.75rem;
-    text-decoration: none;
-    color: var(--color-fg);
-    overflow: hidden;
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    scroll-margin-top: 120px;
-  }
-
-  .bento-featured-resume:hover {
-    transform: translate(3px, 3px);
-    box-shadow: 3px 3px 0 0 var(--color-fg);
-  }
-
-  .feat-num {
-    position: absolute;
-    right: -0.1em;
-    bottom: -0.25em;
-    font-size: clamp(8rem, 20vw, 14rem);
-    font-weight: 900;
-    line-height: 1;
-    color: rgba(0,0,0,0.07);
-    pointer-events: none;
-    user-select: none;
-    letter-spacing: -0.05em;
-  }
-
-  .feat-label {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    background: var(--color-fg);
-    color: var(--color-yellow);
-    padding: 0.2em 0.75em;
-    margin-bottom: 1.5rem;
-    width: fit-content;
-  }
-
-  .feat-meta {
-    font-size: 0.72rem;
-    font-weight: 700;
-    color: rgba(0,0,0,0.5);
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-
-  .feat-title {
-    font-size: clamp(1.6rem, 4vw, 2.8rem);
-    font-weight: 900;
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin: 0;
-    width: 100%;
-    max-width: 22ch;
-    text-transform: none;
-  }
-
-  .feat-desc {
-    font-size: 0.85rem;
-    color: rgba(0,0,0,0.6);
-    line-height: 1.65;
-    margin: 0;
-    max-width: 60ch;
-    font-weight: 400;
-  }
-
-  .feat-arrow {
-    position: absolute;
-    top: 1.75rem;
-    right: 2rem;
-    font-size: 1.5rem;
-    font-weight: 900;
-    opacity: 0.3;
-    transition: opacity 0.15s ease, transform 0.15s ease;
-  }
-
-  .bento-featured-resume:hover .feat-arrow {
-    opacity: 1;
-    transform: translate(3px, -3px);
-  }
-
-  .mini-resume-container:hover .mini-resume-page {
-    transform: rotate(0deg) scale(1.05);
-    box-shadow: 6px 6px 0 0 rgba(0,0,0,1);
-  }
-</style>

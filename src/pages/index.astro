@@ -2,377 +2,105 @@
 import Layout from '../layouts/Layout.astro';
 import '../styles/global.css';
 import { Image } from 'astro:assets';
-import originalImg from '../assets/original.png';
-import filteredImg from '../assets/filtered.png';
-import filteredDarkImg from '../assets/filtered-dark.png';
-import { getCollection } from 'astro:content';
-
-// Latest 3 journal entries for the homepage preview
-const journalEntries = await getCollection('journal', ({ data }) => !data.draft);
-journalEntries.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-const latestEntries = journalEntries.slice(0, 3);
-
-function formatJournalDate(date: Date) {
-  return date.toLocaleDateString('en-US', {
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  }).toUpperCase();
-}
+import placeholderImg from '../assets/placeholder.png';
 ---
 
-<Layout title="Ayan Mahata — Hey!">
+<Layout title="Surya Raghuram — Software Developer">
   <!-- ═══════════════════════════════════════════════
        HERO
        ═══════════════════════════════════════════════ -->
-  <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16 md:mb-24 items-center">
+  <section class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 md:mb-32 items-center fade-in">
     <div class="flex flex-col items-start text-left">
       <span class="neo-tag mb-6">SOFTWARE DEVELOPER</span>
       <h1 class="text-5xl md:text-7xl font-black uppercase tracking-tight leading-none mb-6">HELLO<br/>WORLD!</h1>
       
-      <div class="font-mono text-base md:text-lg leading-relaxed mb-8 max-w-lg" style="color: var(--color-fg); opacity: 0.8;">
-        <p>I’m Ayan, a product-minded full-stack engineer building AI-native mobile experiences. I work across product design, React Native, serverless backends and applied AI, turning early ideas into polished, usable products.</p>
+      <div class="font-mono text-base md:text-lg leading-relaxed mb-8 max-w-lg text-white/80">
+        <p>I’m Surya Raghuram, an IT undergrad at IIIT Allahabad. I build high-performance native engines, scalable full-stack applications, and AI-powered systems. Always tinkering to push the limits of speed and usability.</p>
       </div>
       
       <div class="flex flex-wrap gap-4">
-        <a href="/work" class="neo-btn neo-btn--yellow px-6 py-3 text-base">VIEW WORK</a>
-        <a href="/blog" class="neo-btn px-6 py-3 text-base flex items-center gap-2" style="background-color: var(--color-main);" id="hero-blog-btn">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-          <span>READ BLOG</span>
-        </a>
+        <a href="/work" class="neo-btn neo-btn--yellow text-sm md:text-base">VIEW MY WORK</a>
       </div>
     </div>
     
-    <div class="neo-box w-full h-[320px] md:h-[380px] bg-white relative" id="hero-image-container">
+    <div class="neo-panel w-full h-[320px] md:h-[420px] relative p-2" id="hero-image-container">
+      <div class="absolute inset-0 bg-gradient-to-tr from-[var(--color-cyan)]/20 to-[var(--color-purple)]/20 z-10 pointer-events-none rounded-[24px]"></div>
       <Image 
-        src={filteredImg} 
-        alt="Filtered" 
-        class="absolute inset-0 w-full h-full object-cover pointer-events-none img-light"
-      />
-      <Image 
-        src={filteredDarkImg} 
-        alt="Filtered Dark" 
-        class="absolute inset-0 w-full h-full object-cover pointer-events-none img-dark"
+        src={placeholderImg} 
+        alt="Abstract Neon Tech" 
+        class="w-full h-full object-cover rounded-[20px] transition-transform duration-700 ease-out hover:scale-[1.03]"
       />
     </div>
   </section>
 
-  <div id="image-source-hidden" class="hidden">
-    <Image 
-      src={originalImg} 
-      alt="Original" 
-      id="cursor-glass-img"
-      class="absolute top-1/2 left-1/2 max-w-none object-cover opacity-0 transition-opacity duration-300 pointer-events-none"
-    />
-  </div>
-
-  <script>
-    const container = document.getElementById('hero-image-container');
-    const cursorGlassImg = document.getElementById('cursor-glass-img');
-    // Global magic cursor defined in Layout.astro
-    const magicCursor = document.getElementById('magic-cursor');
-
-    if (container && cursorGlassImg && magicCursor) {
-      
-      // Inject image into the global cursor
-      magicCursor.appendChild(cursorGlassImg);
-
-      let isHoveringOrFading = false;
-      let fadeTimeout;
-      let borderLeft = 3;
-      let borderTop = 3;
-      let lastClientX = 0;
-      let lastClientY = 0;
-
-      // Cache border widths once to avoid layout thrashing during mousemove
-      try {
-        const computedStyle = window.getComputedStyle(container);
-        borderLeft = parseFloat(computedStyle.borderLeftWidth) || 3;
-        borderTop = parseFloat(computedStyle.borderTopWidth) || 3;
-      } catch (err) {}
-
-      const updateCursor = (e) => {
-        if (!isHoveringOrFading) return;
-        
-        // Save the latest mouse position if available (e.g. from mousemove)
-        if (e && e.clientX !== undefined) {
-          lastClientX = e.clientX;
-          lastClientY = e.clientY;
-        }
-        
-        const rect = container.getBoundingClientRect();
-        
-        // Match the inner dimensions of the container (excluding borders)
-        const innerWidth = container.clientWidth;
-        const innerHeight = container.clientHeight;
-        
-        cursorGlassImg.style.width = `${innerWidth}px`;
-        cursorGlassImg.style.height = `${innerHeight}px`;
-
-        // Align with the inner top-left padding box (compensating for border)
-        const innerLeft = rect.left + borderLeft;
-        const innerTop = rect.top + borderTop;
-        
-        // Center-based offset using the last known mouse coordinates
-        const offsetX = innerLeft - lastClientX;
-        const offsetY = innerTop - lastClientY;
-        
-        cursorGlassImg.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
-      };
-
-      // Listen on window so it continues tracking even when cursor leaves the container
-      window.addEventListener('mousemove', updateCursor);
-      // Update offsets on scroll to keep the illusion perfect
-      window.addEventListener('scroll', updateCursor, { passive: true });
-
-      container.addEventListener('mouseenter', (e) => {
-        isHoveringOrFading = true;
-        clearTimeout(fadeTimeout);
-        
-        // Recalculate borders in case of layout changes
-        try {
-          const computedStyle = window.getComputedStyle(container);
-          borderLeft = parseFloat(computedStyle.borderLeftWidth) || 3;
-          borderTop = parseFloat(computedStyle.borderTopWidth) || 3;
-        } catch (err) {}
-
-        // Ensure immediate update before opacity transitions
-        updateCursor(e);
-        
-        magicCursor.classList.remove('image-lens-fading');
-        magicCursor.classList.add('image-lens-active');
-        cursorGlassImg.classList.remove('opacity-0');
-        cursorGlassImg.classList.add('opacity-100');
-      });
-
-      container.addEventListener('mouseleave', () => {
-        magicCursor.classList.remove('image-lens-active');
-        magicCursor.classList.add('image-lens-fading');
-        cursorGlassImg.classList.remove('opacity-100');
-        cursorGlassImg.classList.add('opacity-0');
-        
-        // Keep updating position for 300ms while it fades out
-        fadeTimeout = setTimeout(() => {
-          isHoveringOrFading = false;
-          magicCursor.classList.remove('image-lens-fading');
-        }, 300);
-      });
-    }
-  </script>
-
   <!-- ═══════════════════════════════════════════════
-       BASE OF OPERATIONS (Experience)
+       EXPERIENCE & SKILLS
        ═══════════════════════════════════════════════ -->
-  <section class="neo-panel neo-panel--cyan p-8 md:p-12 mb-16 md:mb-24 relative text-black">
-    <h2 class="text-2xl md:text-4xl font-black mb-8 uppercase tracking-tight">BASE OF OPERATIONS</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-8">
-      <div class="flex flex-col gap-4 font-mono font-bold text-sm md:text-base">
-        <div class="flex items-center gap-3">
-          <span class="bg-black text-white px-2 py-1 text-xs uppercase tracking-wider">LOCATION</span>
-          <span class="text-black">India/GCC</span>
-        </div>
-        <div class="flex items-center gap-3">
-          <span class="bg-black text-white px-2 py-1 text-xs uppercase tracking-wider">STATUS</span>
-          <span class="text-black">Open to collaboration</span>
-        </div>
-      </div>
-      
-      <div class="font-mono text-base md:text-lg leading-relaxed text-black">
-        <p>Currently building apps, experimenting with new ideas, and occasionally getting distracted by consumer electronics.
-Always tinkering with stuff, solving interesting problems, and crafting clean user experiences.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════
-       JOURNAL PREVIEW — Sticky Notes
-       ═══════════════════════════════════════════════ -->
-  <section class="sticky-journal-section mb-0">
-    <div class="flex justify-between items-end mb-10">
-      <h2 class="text-2xl md:text-4xl font-black uppercase tracking-tight">Field Notes.</h2>
-      <a href="/journal" class="neo-btn font-mono text-xs px-4 py-2 flex items-center gap-2">
-        OPEN JOURNAL <span aria-hidden="true">→</span>
-      </a>
-    </div>
-
-    <div class="sticky-notes-container">
-      {latestEntries.length === 0 ? (
-        <p class="font-mono text-sm" style="color:#aaa;">// nothing yet.</p>
-      ) : (
-        <>
-          {latestEntries.map((entry, i) => {
-            const snippet = (entry.body ?? '').replace(/^---[\s\S]*?---/, '').trim().slice(0, 160);
-            const rotation = i % 2 === 0 ? '-3deg' : '4deg';
-            const bgColor = '#fef08a'; /* classic sticky note yellow */
-            
-            return (
-              <a 
-                href={`/journal#entry-${entry.id}`}
-                class="sticky-note group"
-                style={`--note-bg: ${bgColor}; --note-rot: ${rotation};`}
-              >
-                <!-- Masking Tape -->
-                <div class="sticky-tape"></div>
-
-                <div class="sticky-meta font-mono">
-                  <time class="sticky-date">{formatJournalDate(entry.data.date)}</time>
-                  {entry.data.mood && (
-                    <span class="sticky-mood">{entry.data.mood}</span>
-                  )}
-                </div>
-                
-                <p class="sticky-snippet font-mono">{snippet}&hellip;</p>
-                
-                <div class="sticky-footer font-mono">
-                  read entry ↗
-                </div>
-              </a>
-            );
-          })}
-          
-          <!-- 4th sticky note is the View All prompt -->
-          <a 
-            href="/journal" 
-            class="sticky-note sticky-cta group"
-            style="--note-bg: #cffafe; --note-rot: 3deg;"
-          >
-            <div class="sticky-tape"></div>
-            <div class="cta-content text-black">
-              <span class="font-black text-2xl uppercase tracking-tight leading-tight">Found it interesting?</span>
-              <span class="font-mono text-sm mt-3" style="color: rgba(0,0,0,0.7);">Read all journal entries &rarr;</span>
+  <section class="mb-20 md:mb-32 fade-in">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <!-- Experience Column -->
+      <div class="flex flex-col gap-6">
+        <h2 class="text-2xl md:text-3xl font-black mb-4 uppercase tracking-tight text-white flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+          EXPERIENCE
+        </h2>
+        
+        <div class="neo-box p-6 md:p-8 flex flex-col gap-4">
+          <div class="flex flex-wrap justify-between items-start gap-2 border-b border-white/10 pb-4">
+            <div>
+              <h3 class="text-xl font-bold text-[var(--color-cyan)]">GeekHaven, IIIT Allahabad</h3>
+              <p class="font-mono text-sm text-white/60 mt-1">App Development Wing Mentor</p>
             </div>
-          </a>
-        </>
-      )}
+            <span class="font-mono text-xs bg-white/10 px-3 py-1 rounded-full border border-white/20">Sep 2025 – Present</span>
+          </div>
+          <ul class="font-mono text-sm leading-relaxed text-white/80 space-y-3 mt-2 list-disc pl-4">
+            <li><strong class="text-white">Technical Mentorship:</strong> Mentored participants during OpenCode '25, providing guidance on app development, debugging, and best practices.</li>
+            <li><strong class="text-white">Project Management:</strong> Managed Git-based workflows, conducted technical PR reviews, and ensured code quality across projects.</li>
+            <li><strong class="text-white">NomMetric:</strong> Supervised the development of NomMetric (Flutter, Firebase, Riverpod) by defining technical tasks and overseeing contributions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Skills Column -->
+      <div class="flex flex-col gap-6">
+        <h2 class="text-2xl md:text-3xl font-black mb-4 uppercase tracking-tight text-white flex items-center gap-3">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          SKILLS
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">
+          <!-- Languages -->
+          <div class="neo-box p-5">
+            <h3 class="font-mono text-xs font-bold text-white/50 tracking-wider mb-3">LANGUAGES</h3>
+            <div class="flex flex-wrap gap-2">
+              {['C/C++', 'Python', 'Dart', 'Java', 'JavaScript', 'SQL'].map((skill) => (
+                <span class="font-mono text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-md text-[var(--color-cyan)]">{skill}</span>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Frameworks -->
+          <div class="neo-box p-5">
+            <h3 class="font-mono text-xs font-bold text-white/50 tracking-wider mb-3">FRAMEWORKS</h3>
+            <div class="flex flex-wrap gap-2">
+              {['LangGraph', 'PyTorch', 'Flutter', 'React', 'FastAPI', 'Docker'].map((skill) => (
+                <span class="font-mono text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-md text-[var(--color-purple)]">{skill}</span>
+              ))}
+            </div>
+          </div>
+          
+          <!-- Concepts -->
+          <div class="neo-box p-5 md:col-span-2">
+            <h3 class="font-mono text-xs font-bold text-white/50 tracking-wider mb-3">CONCEPTS & TOOLS</h3>
+            <div class="flex flex-wrap gap-2">
+              {['Data Structures', 'Algorithms', 'Computer Networks', 'Linux', 'Bash', 'Git', 'Blender', 'Unity'].map((skill) => (
+                <span class="font-mono text-xs bg-white/5 border border-white/10 px-2.5 py-1 rounded-md text-[var(--color-emerald)]">{skill}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
+
 </Layout>
-
-<style>
-  /* ── Sticky Notes Layout ── */
-  .sticky-journal-section {
-    border-top: 3px solid var(--color-fg);
-    padding-top: 3rem;
-  }
-
-  .sticky-notes-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    padding: 1rem 0 0.5rem;
-  }
-
-  /* ── The Sticky Note ── */
-  .sticky-note {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 340px;
-    background-color: var(--note-bg);
-    border: 3px solid var(--color-fg);
-    box-shadow: 6px 6px 0 0 rgba(0,0,0,0.15); /* softer shadow for paper */
-    padding: 2.5rem 2rem 2rem;
-    text-decoration: none;
-    color: #111;
-    transform: rotate(var(--note-rot));
-    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, z-index 0s;
-    z-index: 10;
-  }
-
-  /* Staggering the even notes */
-  .sticky-note:nth-child(even) {
-    margin-top: 2rem;
-  }
-
-  .sticky-note:hover {
-    transform: rotate(0deg) scale(1.05) translateY(-10px);
-    box-shadow: 12px 12px 0 0 rgba(0,0,0,0.2);
-    z-index: 20;
-  }
-
-  /* CTA Note styles */
-  .sticky-cta {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .cta-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  /* ── Masking Tape ── */
-  .sticky-tape {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-2deg);
-    width: 70px;
-    height: 25px;
-    background-color: rgba(255, 255, 255, 0.65);
-    border: 1.5px solid rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(2px);
-    z-index: 12;
-    box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-  }
-
-  /* ── Content ── */
-  .sticky-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.25rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px dashed rgba(0,0,0,0.2);
-  }
-
-  .sticky-date {
-    font-size: 0.75rem;
-    font-weight: 800;
-  }
-
-  .sticky-mood {
-    font-size: 0.65rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    background-color: rgba(255,255,255,0.4);
-    border: 1.5px solid rgba(0,0,0,0.4);
-    padding: 0.15em 0.5em;
-  }
-
-  .sticky-snippet {
-    font-size: 0.9rem;
-    line-height: 1.6;
-    margin: 0 0 1.5rem;
-    font-weight: 500;
-  }
-
-  .sticky-footer {
-    margin-top: auto;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-align: right;
-    color: rgba(0,0,0,0.5);
-    transition: color 0.2s ease;
-  }
-
-  .sticky-note:hover .sticky-footer {
-    color: #111;
-  }
-
-  /* ── Mobile ── */
-  @media (max-width: 640px) {
-    .sticky-note {
-      transform: rotate(0deg) !important;
-      margin-top: 0 !important;
-    }
-  }
-</style>
