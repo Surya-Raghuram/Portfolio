@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  // site: 'https://your-deployment-url.com',
+  site: 'https://portfolio.suryaraghuramg.workers.dev',
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
