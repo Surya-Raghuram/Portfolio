@@ -16,8 +16,8 @@ const {
 } = Astro.props;
 
 const navLinks = [
-  { label: 'HOME', href: '/' },
-  { label: 'WORK', href: '/work' },
+  { label: 'Home', href: '/' },
+  { label: 'Projects', href: '/work' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -93,17 +93,23 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
             </a>
           </div>
         </div>
-        <ul class="flex items-center gap-2 md:gap-4 m-0 p-0 list-none">
-          {navLinks.map((link) => (
-            <li>
-              <a
-                href={link.href}
-                class="neo-btn text-xs md:text-sm px-4 py-2"
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
+        <ul class="flex items-center gap-3 md:gap-5 m-0 p-0 list-none font-mono text-sm md:text-base">
+          {navLinks.map((link, index) => {
+            const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+            return (
+              <li class="flex items-center gap-3 md:gap-5">
+                <a
+                  href={link.href}
+                  class={`px-4 py-2 rounded-[12px] transition-all duration-300 ${isActive ? 'bg-[var(--color-cyan)]/10 text-[var(--color-cyan)] border border-[var(--color-cyan)]/20 shadow-[0_0_15px_var(--color-cyan)] shadow-[var(--color-cyan)]/10' : 'text-white/60 hover:text-white hover:bg-white/5'}`}
+                >
+                  {link.label}
+                </a>
+                {index < navLinks.length - 1 && (
+                  <span class="text-white/20 select-none">/</span>
+                )}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </nav>
