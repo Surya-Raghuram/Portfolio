@@ -1,25 +1,28 @@
 @import "tailwindcss";
 
-/* ============================================================
-   DESIGN SYSTEM — Premium Glassmorphism & Neon Accents
-   ============================================================ */
-
-/* --- Theme Tokens --- */
 @theme {
-  /* Colors */
-  --color-bg: #050505; /* Deep, rich black */
-  --color-fg: #f8fafc; /* Crisp, off-white text */
-  --color-main: rgba(20, 20, 20, 0.6); /* Translucent panel background */
-  --color-cyan: #00f0ff; /* Neon cyan */
-  --color-purple: #d946ef; /* Neon magenta/purple */
-  --color-emerald: #10b981; /* Premium emerald */
-  --color-blue: #3b82f6; /* Accent blue */
-  --color-yellow: #f59e0b; /* Accent warm */
+  /* Cyberpunk Colors */
+  --color-bg: #050505;
+  --color-fg: #f8fafc;
+  --color-main: rgba(20, 20, 20, 0.6);
+  --color-cyan: #00f0ff;
+  --color-purple: #d946ef;
+  --color-emerald: #10b981;
+  --color-blue: #3b82f6;
+  --color-yellow: #f59e0b;
 
+  /* Comic Colors */
+  --color-comic-yellow: #fde047;
+  --color-comic-red: #ef4444;
+  --color-comic-blue: #3b82f6;
+  --color-comic-bg: #fffbf0;
+  --color-comic-fg: #1a1a1a;
+  
   /* Fonts */
   --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
   --font-heading: 'Outfit', 'Inter', system-ui, -apple-system, sans-serif;
   --font-mono: 'IBM Plex Mono', 'JetBrains Mono', monospace;
+  --font-comic: 'Bangers', cursive;
 
   /* Glassmorphism specifics */
   --border-glass: 1px solid rgba(255, 255, 255, 0.08);
@@ -35,18 +38,6 @@
   --container-max: 1100px;
 }
 
-html.light {
-  /* Light mode tokens (if user wants to toggle, though this focuses on premium dark) */
-  --color-bg: #f8fafc;
-  --color-fg: #0f172a;
-  --color-main: rgba(255, 255, 255, 0.7);
-  --color-cyan: #0284c7;
-  --color-purple: #9333ea;
-  --border-glass: 1px solid rgba(0, 0, 0, 0.08);
-  --box-shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
-}
-
-/* --- Base Reset & Typography --- */
 @layer base {
   @media (pointer: fine) {
     html.custom-cursor-active,
@@ -55,63 +46,16 @@ html.light {
     }
   }
 
-  #magic-cursor {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: rgba(0, 240, 255, 0.3);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
-    pointer-events: none;
-    z-index: 9999;
-    overflow: hidden;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      height 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      border-radius 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-      background-color 0.3s ease,
-      box-shadow 0.3s ease;
-    will-change: transform, width, height;
-  }
-
-  html.custom-cursor-active #magic-cursor {
-    display: block;
-  }
-
-  #magic-cursor.lens-active {
-    width: 60px;
-    height: 60px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: invert(0.2) blur(2px);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
-  }
-
-  #magic-cursor.selector-active {
-    width: 40px;
-    height: 40px;
-    background: rgba(217, 70, 239, 0.2);
-    box-shadow: 0 0 20px rgba(217, 70, 239, 0.4);
-    border: 1px solid rgba(217, 70, 239, 0.5);
-  }
-
   html {
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
     overscroll-behavior: none;
-    background-color: var(--color-bg);
+    background-color: var(--color-bg); /* Default fallback */
   }
 
   body {
-    font-family: var(--font-sans);
-    background-color: var(--color-bg);
-    color: var(--color-fg);
-    line-height: 1.7;
     margin: 0;
     padding: 0;
     position: relative;
@@ -119,8 +63,20 @@ html.light {
     overflow-x: hidden;
   }
 
+  /* ════════════════════════════════════════════════════
+     THEME: CYBERPUNK (NEON & GLASS)
+     ════════════════════════════════════════════════════ */
+  .theme-cyberpunk {
+    font-family: var(--font-sans);
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
   /* Ambient Glow Backgrounds */
-  body::before, body::after {
+  .theme-cyberpunk::before, .theme-cyberpunk::after {
     content: "";
     position: fixed;
     border-radius: 50%;
@@ -131,19 +87,15 @@ html.light {
     animation: drift 20s infinite alternate ease-in-out;
   }
 
-  body::before {
-    top: -10%;
-    left: -10%;
-    width: 50vw;
-    height: 50vw;
+  .theme-cyberpunk::before {
+    top: -10%; left: -10%;
+    width: 50vw; height: 50vw;
     background: radial-gradient(circle, var(--color-cyan), transparent 60%);
   }
 
-  body::after {
-    bottom: -10%;
-    right: -10%;
-    width: 60vw;
-    height: 60vw;
+  .theme-cyberpunk::after {
+    bottom: -10%; right: -10%;
+    width: 60vw; height: 60vw;
     background: radial-gradient(circle, var(--color-purple), transparent 60%);
     animation-delay: -10s;
   }
@@ -153,7 +105,7 @@ html.light {
     100% { transform: translate(5%, 5%); }
   }
 
-  h1, h2, h3, h4 {
+  .theme-cyberpunk h1, .theme-cyberpunk h2, .theme-cyberpunk h3, .theme-cyberpunk h4 {
     font-family: var(--font-heading);
     font-weight: 700;
     line-height: 1.2;
@@ -161,31 +113,74 @@ html.light {
     letter-spacing: -0.01em;
   }
 
-  h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
-  h2 { font-size: clamp(1.5rem, 4vw, 3rem); }
-  h3 { font-size: clamp(1.25rem, 2vw, 1.75rem); }
+  .theme-cyberpunk p { margin: 0; color: rgba(255, 255, 255, 0.7); }
+  .theme-cyberpunk a { color: var(--color-cyan); text-decoration: none; transition: color 0.2s ease, text-shadow 0.2s ease; }
+  .theme-cyberpunk a:hover { color: var(--color-purple); text-shadow: 0 0 10px rgba(217, 70, 239, 0.5); }
+  .theme-cyberpunk hr { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 2rem 0; }
+  .theme-cyberpunk code, .theme-cyberpunk .mono { font-family: var(--font-mono); }
+  
+  .theme-cyberpunk ::selection { background-color: rgba(0, 240, 255, 0.3); color: #fff; }
 
-  p { margin: 0; color: rgba(255, 255, 255, 0.7); }
-  html.light p { color: rgba(0, 0, 0, 0.7); }
-
-  a { color: var(--color-cyan); text-decoration: none; transition: color 0.2s ease, text-shadow 0.2s ease; }
-  a:hover { color: var(--color-purple); text-shadow: 0 0 10px rgba(217, 70, 239, 0.5); }
-
-  hr {
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    margin: 2rem 0;
+  /* ════════════════════════════════════════════════════
+     THEME: COMIC BOOK (FLAT, HEAVY BORDERS, HALFTONE)
+     ════════════════════════════════════════════════════ */
+  .theme-comic {
+    font-family: var(--font-comic);
+    background-color: var(--color-comic-bg);
+    color: var(--color-comic-fg);
+    line-height: 1.7; /* Match Cyberpunk exactly to prevent layout shifts */
+    position: relative;
+    z-index: 1;
+    /* Halftone pattern */
+    background-image: radial-gradient(#d1d5db 2px, transparent 0);
+    background-size: 16px 16px;
   }
 
-  code, .mono { font-family: var(--font-mono); }
-
-  ::selection {
-    background-color: rgba(0, 240, 255, 0.3);
-    color: #fff;
+  .theme-comic h1, .theme-comic h2, .theme-comic h3, .theme-comic h4, .theme-comic p, .theme-comic span, .theme-comic div, .theme-comic a, .theme-comic button, .theme-comic strong, .theme-comic em, .theme-comic li {
+    font-family: var(--font-comic) !important; /* Force comic font everywhere */
+    letter-spacing: 0.15em !important; /* Widen Bangers significantly to match Inter's natural width */
+    word-spacing: 0.15em !important;
+    font-size: 1.25em; /* Scale up significantly to match Inter's visual height */
   }
+
+  .theme-comic h1, .theme-comic h2, .theme-comic h3, .theme-comic h4 {
+    font-size: 1em; /* Prevent headers from scaling too much, they are big enough */
+  }
+
+  /* Force colors to prevent invisible text from Tailwind utility classes */
+  .theme-comic * {
+    border-color: black !important;
+  }
+  
+  .theme-comic .text-white, .theme-comic .text-white\/60, .theme-comic .text-white\/80, .theme-comic .text-white\/70, .theme-comic .text-white\/50, .theme-comic .text-white\/40, .theme-comic .text-white\/20, .theme-comic [class*="text-[var(--color-cyan)]"], .theme-comic [class*="text-[var(--color-purple)]"], .theme-comic [class*="text-[var(--color-emerald)]"] {
+    color: var(--color-comic-fg) !important;
+  }
+  
+  .theme-comic .bg-white\/5, .theme-comic .bg-white\/10 {
+    background-color: transparent !important;
+  }
+
+  .theme-comic h1 { 
+    /* Hard solid offset shadows for that 3D comic text effect */
+    text-shadow: 3px 3px 0 var(--color-comic-red), 6px 6px 0 black !important; 
+    color: white !important;
+    -webkit-text-stroke: 2px black;
+  }
+  
+  .theme-comic h2 {
+    text-shadow: 2px 2px 0 var(--color-comic-yellow), 4px 4px 0 black !important;
+    color: white !important;
+    -webkit-text-stroke: 1px black;
+  }
+
+  .theme-comic p { color: var(--color-comic-fg); font-size: 1.25rem; }
+  .theme-comic a { color: var(--color-comic-blue) !important; text-decoration: underline; text-decoration-thickness: 3px; font-weight: bold; }
+  .theme-comic a:hover { color: var(--color-comic-red) !important; }
+  .theme-comic hr { border: none; border-top: 4px solid black; margin: 2rem 0; }
+  
+  .theme-comic ::selection { background-color: var(--color-comic-yellow); color: black; }
 }
 
-/* --- Utility Classes --- */
 @layer utilities {
   .container-page {
     max-width: var(--container-max);
@@ -195,11 +190,10 @@ html.light {
     padding-right: var(--spacing-page-x);
   }
 
-  /* Glassmorphism Panel */
-  .neo-panel, .neo-box {
+  /* Cyberpunk Elements */
+  .theme-cyberpunk .neo-panel, .theme-cyberpunk .neo-box {
     background: var(--color-main);
     backdrop-filter: var(--blur-glass);
-    -webkit-backdrop-filter: var(--blur-glass);
     border: var(--border-glass);
     border-radius: var(--border-radius-glass);
     box-shadow: var(--box-shadow-glass);
@@ -207,82 +201,113 @@ html.light {
     position: relative;
     overflow: hidden;
   }
-
-  /* Subtle inner glow for panels */
-  .neo-panel::before, .neo-box::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%);
-    pointer-events: none;
+  .theme-cyberpunk .neo-panel::before, .theme-cyberpunk .neo-box::before {
+    content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 100%); pointer-events: none;
   }
-
-  .neo-panel:hover {
+  .theme-cyberpunk .neo-panel:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 240, 255, 0.1);
   }
 
-  /* Glass Buttons */
-  .neo-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 999px; /* Pill shape */
-    color: var(--color-fg);
-    font-weight: 500;
+  .theme-cyberpunk .neo-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 999px;
+    color: var(--color-fg); font-weight: 500; padding: 0.75rem 1.5rem; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.1); letter-spacing: 0.05em;
+  }
+  .theme-cyberpunk .neo-btn:hover {
+    background: rgba(255, 255, 255, 0.1); border-color: rgba(255, 255, 255, 0.3); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0, 240, 255, 0.2); color: var(--color-cyan);
+  }
+  .theme-cyberpunk .neo-btn--yellow { background: rgba(0, 240, 255, 0.1); border-color: rgba(0, 240, 255, 0.3); color: var(--color-cyan); }
+  .theme-cyberpunk .neo-btn--yellow:hover { background: rgba(0, 240, 255, 0.2); border-color: rgba(0, 240, 255, 0.5); box-shadow: 0 0 20px rgba(0, 240, 255, 0.3); }
+
+  .theme-cyberpunk .neo-tag {
+    display: inline-block; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px;
+    color: var(--color-emerald); font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500; padding: 0.25rem 0.75rem; text-transform: uppercase;
+  }
+
+  /* Comic Book Elements */
+  .theme-comic .neo-panel, .theme-comic .neo-box {
+    background: white !important;
+    border: 1px solid black !important; /* Match Cyberpunk border width */
+    border-radius: 24px !important; /* Match Cyberpunk radius to avoid inner padding shift */
+    box-shadow: inset 0 0 0 3px black, 8px 8px 0px 0px black !important;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+  }
+  .theme-comic .neo-panel:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: inset 0 0 0 3px black, 10px 10px 0px 0px black !important;
+  }
+
+  .theme-comic .neo-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--color-comic-yellow) !important;
+    border: 1px solid black !important;
+    border-radius: 999px !important;
+    box-shadow: inset 0 0 0 2px black, 4px 4px 0 black !important;
+    color: black !important;
+    font-size: 1.2rem;
     padding: 0.75rem 1.5rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    letter-spacing: 0.05em;
-  }
-
-  .neo-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 240, 255, 0.2);
-    color: var(--color-cyan);
-  }
-
-  .neo-btn--yellow {
-    background: rgba(0, 240, 255, 0.1);
-    border-color: rgba(0, 240, 255, 0.3);
-    color: var(--color-cyan);
-  }
-
-  .neo-btn--yellow:hover {
-    background: rgba(0, 240, 255, 0.2);
-    border-color: rgba(0, 240, 255, 0.5);
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
-  }
-
-  /* Sleek Tags */
-  .neo-tag {
-    display: inline-block;
-    background: rgba(16, 185, 129, 0.1); /* Emerald tint */
-    border: 1px solid rgba(16, 185, 129, 0.3);
-    border-radius: 12px;
-    color: var(--color-emerald);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.25rem 0.75rem;
+    transition: all 0.1s;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+  }
+  .theme-comic .neo-btn:hover {
+    transform: translate(2px, 2px);
+    box-shadow: inset 0 0 0 2px black, 2px 2px 0 black !important;
+    background: var(--color-comic-red) !important;
+    color: white !important;
   }
 
-  .neo-tag--cyan { background: rgba(0, 240, 255, 0.1); border-color: rgba(0, 240, 255, 0.3); color: var(--color-cyan); }
-  .neo-tag--pink { background: rgba(217, 70, 239, 0.1); border-color: rgba(217, 70, 239, 0.3); color: var(--color-purple); }
-  .neo-tag--yellow { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.3); color: var(--color-yellow); }
-}
+  .theme-comic .neo-tag {
+    display: inline-block; background: white !important; border: 1px solid black !important; box-shadow: inset 0 0 0 1px black, 2px 2px 0 black !important;
+    border-radius: 12px !important;
+    color: black !important; font-size: 1rem; padding: 0.25rem 0.75rem; text-transform: uppercase;
+  }
 
-/* Animations */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+  /* Lens Layer styles */
+  .lens-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    pointer-events: none;
+    /* Hide scrollbars on lens layer */
+    overflow: hidden;
+  }
 
-.fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  .lens-layer-inner {
+    /* Must precisely overlap the base layer. It will scroll inherently if it's identical markup. */
+    width: 100%;
+  }
+  
+  /* Visual Action Bubbles */
+  .comic-action-bubble {
+    position: absolute;
+    font-family: var(--font-comic);
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-comic-yellow);
+    text-shadow: 2px 2px 0 var(--color-comic-red), 4px 4px 0 black;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+    opacity: 0;
+    animation: comicPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  }
+
+  @keyframes comicPop {
+    0% { transform: translate(-50%, -50%) scale(0.5) rotate(-10deg); opacity: 0; }
+    50% { transform: translate(-50%, -50%) scale(1.2) rotate(5deg); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 0; }
+  }
+
+  /* Fade in */
+  .fade-in { animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}

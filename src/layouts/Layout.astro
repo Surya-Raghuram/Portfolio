@@ -50,20 +50,19 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={resolvedImageURL} />
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;700;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Bangers&family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
-  <body class="bg-black text-white">
-    <!-- Custom Magic Cursor -->
-    <div id="magic-cursor"></div>
+  <body>
+    <!-- Base Layer for current active theme -->
+    <div id="base-layer" class="theme-comic w-full min-h-screen relative z-0">
 
     <!-- Navigation -->
     <nav class="fixed top-6 left-0 right-0 z-[100] px-4 md:px-8 max-w-[1100px] mx-auto w-full transition-all duration-300" id="site-nav">
@@ -72,6 +71,10 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           <a href="/" class="font-heading text-xl font-bold tracking-tight text-white hover:text-[var(--color-cyan)] transition-colors" id="nav-home">
             SURYA RAGHURAM
           </a>
+          <button id="theme-toggle" class="ml-4 p-2 rounded-full border border-white/10 transition-colors flex items-center justify-center neo-btn hover:scale-110 bg-white/5" aria-label="Toggle Theme" title="Toggle Theme Lens">
+            <svg id="icon-comic" class="w-4 h-4 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            <svg id="icon-cyber" class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+          </button>
           <div class="hidden md:flex items-center gap-3 ml-4 border-l border-white/10 pl-4">
             <a
               href="https://github.com/suryaraghuramg"
@@ -127,8 +130,12 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           <span class="font-mono text-xs opacity-70">LAST UPDATED: {new Date().toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase()}</span>
         </div>
         
-        <div class="text-center font-mono font-light text-xs">
+        <div class="text-center font-mono font-light text-xs flex flex-col gap-1 items-center">
           <span>BUILT WITH <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-[var(--color-cyan)] hover:text-white transition-colors underline decoration-dotted underline-offset-4 font-bold">ASTRO.JS</a></span>
+          <a href="https://github.com/suryaraghuramg/Portfolio-Website" target="_blank" rel="noopener noreferrer" class="text-white/40 hover:text-[var(--color-cyan)] transition-colors flex items-center gap-1.5 mt-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+            SOURCE CODE
+          </a>
         </div>
 
         <div class="flex items-center gap-3">
@@ -174,6 +181,13 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
 
     <!-- Scroll Progress Line -->
     <div id="scroll-progress" class="fixed top-0 left-0 h-1 bg-[var(--color-cyan)] z-[200] transition-all duration-100 ease-out shadow-[0_0_10px_var(--color-cyan)]" style="width: 0%;"></div>
+
+    </div> <!-- End base-layer -->
+
+    <!-- Lens Layer (X-Ray clone) -->
+    <div id="lens-layer" class="theme-cyberpunk lens-layer" style="clip-path: circle(0px at 0 0);">
+      <div id="lens-layer-inner" class="lens-layer-inner"></div>
+    </div>
 
     <script>
       import pressSound from '../assets/press-sound.mp3';
@@ -245,17 +259,55 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
         } catch (err) {}
       };
 
+      // Visual Comic Action FX
+      const createVisualEffect = (x: number, y: number) => {
+        const words = ['BAM!', 'POW!', 'ZAP!', 'BOOM!'];
+        const word = words[Math.floor(Math.random() * words.length)];
+        const el = document.createElement('div');
+        el.className = 'comic-action-bubble';
+        el.textContent = word;
+        el.style.left = `${x}px`;
+        el.style.top = `${y + window.scrollY}px`;
+        document.body.appendChild(el);
+        setTimeout(() => el.remove(), 400);
+      };
+
       document.body.addEventListener('click', (e) => {
         const target = e.target as HTMLElement;
         if (!target) return;
+
+        // Theme Toggle
+        if (target.closest('#theme-toggle')) {
+          e.preventDefault();
+          e.stopPropagation();
+          const baseLayer = document.getElementById('base-layer');
+          const lensLayer = document.getElementById('lens-layer');
+          const isCyberpunk = baseLayer?.classList.contains('theme-cyberpunk');
+          
+          if (isCyberpunk) { // Changing to Comic
+            baseLayer?.classList.replace('theme-cyberpunk', 'theme-comic');
+            lensLayer?.classList.replace('theme-comic', 'theme-cyberpunk');
+            document.getElementById('icon-cyber')?.classList.remove('hidden');
+            document.getElementById('icon-comic')?.classList.add('hidden');
+          } else { // Changing to Cyberpunk
+            baseLayer?.classList.replace('theme-comic', 'theme-cyberpunk');
+            lensLayer?.classList.replace('theme-cyberpunk', 'theme-comic');
+            document.getElementById('icon-comic')?.classList.remove('hidden');
+            document.getElementById('icon-cyber')?.classList.add('hidden');
+          }
+          playAudio('click');
+          createVisualEffect(e.clientX, e.clientY);
+          return;
+        }
+
         const link = target.closest('a') as HTMLAnchorElement | null;
         const isInteractive = target.closest('button, [role="button"], .neo-btn');
 
         if (isInteractive || link) {
-          const isNavbar = target.closest('.site-nav');
-          if (isNavbar) playAudio('click');
-          else playAudio('press');
+          playAudio('click');
         }
+        
+        createVisualEffect(e.clientX, e.clientY);
 
         if (link) {
           const href = link.getAttribute('href');
@@ -273,12 +325,24 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
         }
       });
 
-      const updateMousePosition = (e: MouseEvent) => {
-        document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-        document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-        if (magicCursor) {
-          magicCursor.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      let targetLensSize = 60;
+      let currentLensSize = 0;
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+
+      const animateLens = () => {
+        currentLensSize += (targetLensSize - currentLensSize) * 0.15;
+        const lensLayer = document.getElementById('lens-layer');
+        if (lensLayer) {
+          lensLayer.style.clipPath = `circle(${currentLensSize}px at ${mouseX}px ${mouseY}px)`;
         }
+        requestAnimationFrame(animateLens);
+      };
+      requestAnimationFrame(animateLens);
+
+      const updateMousePosition = (e: MouseEvent) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
       };
 
       const updateTouchPosition = (e: TouchEvent) => {
@@ -313,26 +377,84 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
       window.addEventListener('resize', updateScrollProgress, { passive: true });
 
       const initLensEffect = () => {
-        const cursor = document.getElementById('magic-cursor');
-        if (!cursor) return;
+        const baseLayer = document.getElementById('base-layer');
+        const lensLayerInner = document.getElementById('lens-layer-inner');
+        if (baseLayer && lensLayerInner) {
+          const clone = baseLayer.cloneNode(true) as HTMLElement;
+          
+          // Strip the theme class from the clone so it inherits the lens-layer's theme
+          clone.className = 'w-full min-h-screen relative z-0';
+          
+          // Remove scripts and IDs to avoid duplicate execution and ID conflicts
+          clone.querySelectorAll('script').forEach(s => s.remove());
+          clone.id = '';
+          clone.querySelectorAll('[id]').forEach(el => el.id = '');
+          
+          // Extract the nav from the cloned content and attach it directly to the lensLayer 
+          // so that it stays fixed to the viewport instead of scrolling away with lensLayerInner
+          const lensLayer = document.getElementById('lens-layer');
+          const clonedNav = clone.querySelector('nav');
+          if (clonedNav && lensLayer) {
+            clonedNav.remove();
+            lensLayer.appendChild(clonedNav);
+          }
+          
+          lensLayerInner.appendChild(clone);
+          
+          const syncScroll = () => {
+             lensLayerInner.style.transform = `translateY(-${window.scrollY}px)`;
+          };
+          window.addEventListener('scroll', syncScroll, { passive: true });
+          syncScroll();
+
+          // SURE-FIRE HEIGHT SYNC: Force both layers to have identical panel heights
+          const syncHeights = () => {
+             if (!baseLayer || !lensLayerInner) return;
+             // Query only panels inside section/main to exclude the nav which was moved out of lensLayerInner
+             const basePanels = baseLayer.querySelectorAll('section .neo-panel, section .neo-box, main .neo-panel, main .neo-box');
+             const lensPanels = lensLayerInner.querySelectorAll('section .neo-panel, section .neo-box, main .neo-panel, main .neo-box');
+             
+             // Reset min-heights first to get natural heights
+             basePanels.forEach(p => (p as HTMLElement).style.minHeight = '0');
+             lensPanels.forEach(p => (p as HTMLElement).style.minHeight = '0');
+             
+             basePanels.forEach((baseEl, i) => {
+               const lensEl = lensPanels[i] as HTMLElement;
+               if (lensEl) {
+                 const baseHeight = (baseEl as HTMLElement).offsetHeight;
+                 const lensHeight = lensEl.offsetHeight;
+                 const max = Math.max(baseHeight, lensHeight);
+                 (baseEl as HTMLElement).style.minHeight = `${max}px`;
+                 lensEl.style.minHeight = `${max}px`;
+               }
+             });
+          };
+          
+          // Run sync on load, and on window resize
+          setTimeout(syncHeights, 100);
+          window.addEventListener('resize', () => {
+             setTimeout(syncHeights, 50);
+          });
+          
+          // Sync when theme toggles in case reflows occur
+          document.getElementById('theme-toggle')?.addEventListener('click', () => {
+             setTimeout(syncHeights, 100);
+          });
+        }
         
         document.body.addEventListener('mouseover', (e) => {
           const target = e.target as HTMLElement;
           if (!target) return;
 
-          if (target.closest('.neo-btn, button, a')) {
-            cursor.classList.remove('lens-active');
-            cursor.classList.add('selector-active');
-            return;
-          } else {
-            cursor.classList.remove('selector-active');
-          }
+          const isClickable = target.closest('.neo-btn, button, a');
+          const isBox = target.closest('.neo-tag, .neo-box');
           
-          const isTextElement = target.closest('h1, h2, h3, h4, h5, h6, p, span, li, strong, em');
-          if (isTextElement) {
-            cursor.classList.add('lens-active');
+          if (isClickable) {
+            targetLensSize = 30; // Shrink and focus on interactive element
+          } else if (isBox) {
+            targetLensSize = 120; // Enlarge lens for reading cards
           } else {
-            cursor.classList.remove('lens-active');
+            targetLensSize = 60; // Normal lens
           }
         });
       };

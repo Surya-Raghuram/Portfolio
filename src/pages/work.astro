@@ -110,7 +110,7 @@ const achievements = [
       <div class="grid grid-cols-1 gap-8">
         {
           featuredProjects.map((item) => (
-            <article class="neo-panel p-8 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-12 group">
+            <article class="neo-panel p-8 md:p-10 flex flex-col lg:flex-row gap-8 lg:gap-12 group min-h-[450px] lg:min-h-[350px]">
               
               <!-- Left Column: Title, Tags & Tech Stack -->
               <div class="lg:w-2/5 flex flex-col gap-4">
@@ -138,12 +138,12 @@ const achievements = [
               </div>
 
               <!-- Right Column: Content & Links -->
-              <div class="lg:w-3/5 flex flex-col justify-between">
+              <div class="lg:w-3/5 flex flex-col h-full min-h-[200px]">
                 <p class="font-mono text-base md:text-lg leading-relaxed text-white/70">
                   {item.description}
                 </p>
                 {item.links && item.links.length > 0 && (
-                  <div class="flex flex-wrap gap-4 mt-8">
+                  <div class="flex flex-wrap gap-4 mt-auto pt-8">
                     {item.links.map(link => (
                       <a
                         href={link.url}
@@ -187,7 +187,7 @@ const achievements = [
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         {achievements.map(ach => (
-          <article class="neo-panel p-6 flex flex-col gap-4 group">
+          <article class="neo-panel p-6 flex flex-col gap-4 group min-h-[300px]">
             <div class="flex items-start justify-between">
               <h3 class="text-xl font-black text-white group-hover:text-[var(--color-purple)] transition-colors">{ach.title}</h3>
               <span class="neo-tag neo-tag--purple text-[10px] bg-white/5 border-white/10 text-[var(--color-purple)] px-2 py-0.5">{ach.category}</span>
