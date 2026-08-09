@@ -447,14 +447,35 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           if (!target) return;
 
           const isClickable = target.closest('.neo-btn, button, a');
+          const isHeaderOrFooter = target.closest('nav, footer');
           const isBox = target.closest('.neo-tag, .neo-box');
           
-          if (isClickable) {
-            targetLensSize = 30; // Shrink and focus on interactive element
+          if (isClickable || isHeaderOrFooter) {
+            targetLensSize = 15; // Shrink for interactive elements, header, and footer
           } else if (isBox) {
             targetLensSize = 120; // Enlarge lens for reading cards
           } else {
             targetLensSize = 60; // Normal lens
+          }
+        });
+
+        document.body.addEventListener('mousedown', (e) => {
+          const target = e.target as HTMLElement;
+          if (!target) return;
+          const isClickable = target.closest('.neo-btn, button, a');
+          if (isClickable) {
+            targetLensSize = 15; // Shrink to a small circle on click
+          }
+        });
+
+        document.body.addEventListener('mouseup', (e) => {
+          const target = e.target as HTMLElement;
+          if (!target) return;
+          const isClickable = target.closest('.neo-btn, button, a');
+          if (isClickable) {
+            targetLensSize = 30; // Restore to hover size
+          } else {
+            targetLensSize = 60; // Restore to normal
           }
         });
       };
