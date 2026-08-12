@@ -184,9 +184,54 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
 
     </div> <!-- End base-layer -->
 
-    <!-- Lens Layer (X-Ray clone) -->
-    <div id="lens-layer" class="theme-cyberpunk lens-layer" style="clip-path: circle(0px at 0 0);">
-      <div id="lens-layer-inner" class="lens-layer-inner"></div>
+    <!-- Removed Lens Layer -->
+
+    <!-- Global Custom Cursor -->
+    <div id="global-cursor" class="fixed pointer-events-none z-[9999] hidden left-0 top-0 w-8 h-8" style="transform-origin: 0 0;">
+      <!-- Comic Cursors Group -->
+      <div id="cursor-comic-group" class="absolute inset-0">
+        <!-- Default Yellow Arrow -->
+        <div id="cursor-comic-default" class="absolute inset-0 transition-all duration-150">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 28 28" class="w-full h-full drop-shadow-[2px_2px_0_rgba(0,0,0,1)] overflow-visible">
+            <path d="M0 0 l8 18 l3-7 l7-3 z" fill="var(--color-comic-yellow)" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        
+        <!-- Interactive Starburst (Buttons/Links) -->
+        <div id="cursor-comic-pointer" class="absolute inset-0 opacity-0 scale-50 transition-all duration-150 -ml-2 -mt-2 w-12 h-12">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 28 28" class="w-full h-full drop-shadow-[2px_2px_0_rgba(0,0,0,1)] overflow-visible animate-[spin_4s_linear_infinite]">
+            <path d="M12 0 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 z" fill="var(--color-comic-red)" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+          </svg>
+        </div>
+
+        <!-- Text Magnifier (Hovering Text) -->
+        <div id="cursor-comic-text" class="absolute inset-0 opacity-0 scale-50 transition-all duration-150 -ml-1 -mt-1 w-10 h-10">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 28 28" class="w-full h-full drop-shadow-[2px_2px_0_rgba(0,0,0,1)] overflow-visible">
+            <circle cx="10" cy="10" r="7" fill="var(--color-comic-blue)" fill-opacity="0.2" stroke="#000" stroke-width="2.5"/>
+            <path d="M15 15 l6 6" stroke="#000" stroke-width="3" stroke-linecap="round"/>
+            <path d="M8 10 h4" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+            <path d="M10 8 v4" stroke="#000" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+
+        <!-- Thought Bubble (Hovering Cards/Images) -->
+        <div id="cursor-comic-thought" class="absolute inset-0 opacity-0 scale-50 transition-all duration-150 -ml-4 -mt-6 w-16 h-16">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 40 40" class="w-full h-full drop-shadow-[2px_2px_0_rgba(0,0,0,1)] overflow-visible">
+            <path d="M18 4 C 28 4, 34 10, 34 16 C 34 22, 28 28, 18 28 C 8 28, 2 22, 2 16 C 2 10, 8 4, 18 4 Z" fill="white" stroke="#000" stroke-width="2.5" stroke-linejoin="round"/>
+            <text x="18" y="20" font-family="Bangers, cursive" font-size="10" text-anchor="middle" fill="#000">LOOK!</text>
+            <circle cx="10" cy="32" r="3" fill="white" stroke="#000" stroke-width="2"/>
+            <circle cx="4" cy="36" r="1.5" fill="white" stroke="#000" stroke-width="2"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Cyberpunk Cursor -->
+      <div id="cursor-cyber" class="absolute inset-0 hidden -ml-4 -mt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-full h-full">
+          <circle cx="12" cy="12" r="3" fill="var(--color-cyan)" />
+          <path d="M12 2v6M12 16v6M2 12h6M16 12h6" stroke="var(--color-cyan)" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
     </div>
 
     <script>
@@ -195,11 +240,30 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
 
       // Enable custom cursor styles only if JS loads and not on a mobile browser in normal view
       const isMobileUA = /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const globalCursor = document.getElementById('global-cursor');
+      const cursorComicGroup = document.getElementById('cursor-comic-group');
+      const cursorCyber = document.getElementById('cursor-cyber');
+      
+      const cursorComicDefault = document.getElementById('cursor-comic-default');
+      const cursorComicPointer = document.getElementById('cursor-comic-pointer');
+      const cursorComicText = document.getElementById('cursor-comic-text');
+      const cursorComicThought = document.getElementById('cursor-comic-thought');
+
       if (!isMobileUA) {
         document.documentElement.classList.add('custom-cursor-active');
+        if (globalCursor) globalCursor.classList.remove('hidden');
+
+        // Initial theme setup for cursor
+        const initialBase = document.getElementById('base-layer');
+        if (initialBase?.classList.contains('theme-comic')) {
+           cursorComicGroup?.classList.remove('hidden');
+        } else {
+           cursorComicGroup?.classList.add('hidden');
+           cursorCyber?.classList.remove('hidden');
+        }
       }
 
-      const magicCursor = document.getElementById('magic-cursor');
+      const magicCursor = document.getElementById('global-cursor'); // For modal logic compatibility
 
       // Click & Press sounds Web Audio API setup for zero-latency playback
       let pressBuffer: AudioBuffer | null = null;
@@ -281,19 +345,19 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           e.preventDefault();
           e.stopPropagation();
           const baseLayer = document.getElementById('base-layer');
-          const lensLayer = document.getElementById('lens-layer');
           const isCyberpunk = baseLayer?.classList.contains('theme-cyberpunk');
-          
           if (isCyberpunk) { // Changing to Comic
             baseLayer?.classList.replace('theme-cyberpunk', 'theme-comic');
-            lensLayer?.classList.replace('theme-comic', 'theme-cyberpunk');
             document.getElementById('icon-cyber')?.classList.remove('hidden');
             document.getElementById('icon-comic')?.classList.add('hidden');
+            cursorComicGroup?.classList.remove('hidden');
+            cursorCyber?.classList.add('hidden');
           } else { // Changing to Cyberpunk
             baseLayer?.classList.replace('theme-comic', 'theme-cyberpunk');
-            lensLayer?.classList.replace('theme-cyberpunk', 'theme-comic');
             document.getElementById('icon-comic')?.classList.remove('hidden');
             document.getElementById('icon-cyber')?.classList.add('hidden');
+            cursorCyber?.classList.remove('hidden');
+            cursorComicGroup?.classList.add('hidden');
           }
           playAudio('click');
           createVisualEffect(e.clientX, e.clientY);
@@ -329,16 +393,70 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
       let currentLensSize = 0;
       let mouseX = window.innerWidth / 2;
       let mouseY = window.innerHeight / 2;
+      
+      let cursorX = mouseX;
+      let cursorY = mouseY;
+      let lastMouseX = mouseX;
+      let lastMouseY = mouseY;
+      let trailTimer = 0;
 
-      const animateLens = () => {
-        currentLensSize += (targetLensSize - currentLensSize) * 0.15;
-        const lensLayer = document.getElementById('lens-layer');
-        if (lensLayer) {
-          lensLayer.style.clipPath = `circle(${currentLensSize}px at ${mouseX}px ${mouseY}px)`;
-        }
-        requestAnimationFrame(animateLens);
+      const createSpeedLine = (x: number, y: number, angle: number) => {
+        const line = document.createElement('div');
+        line.className = 'comic-speed-line';
+        line.style.left = `${x}px`;
+        line.style.top = `${y}px`;
+        line.style.setProperty('--angle', `${angle}rad`);
+        document.body.appendChild(line);
+        setTimeout(() => line.remove(), 250);
       };
-      requestAnimationFrame(animateLens);
+
+      const animateCursor = () => {
+        const baseLayer = document.getElementById('base-layer');
+        const isComic = baseLayer?.classList.contains('theme-comic');
+        
+        // Custom Cursor Animation
+        if (globalCursor && !isMobileUA) {
+           const velX = mouseX - lastMouseX;
+           const velY = mouseY - lastMouseY;
+           const speed = Math.sqrt(velX*velX + velY*velY);
+           
+           if (isComic) {
+              // Comicy movement: slight springy lag
+              cursorX += (mouseX - cursorX) * 0.6;
+              cursorY += (mouseY - cursorY) * 0.6;
+              
+              const angle = Math.atan2(velY, velX);
+              let scaleX = 1;
+              let scaleY = 1;
+              let tilt = 0;
+              
+              if (speed > 5) {
+                 scaleX = Math.min(1 + speed / 60, 1.3);
+                 scaleY = Math.max(1 - speed / 80, 0.8);
+                 // Tilt the cursor based on horizontal velocity
+                 tilt = Math.max(-25, Math.min(25, velX * 0.5));
+                 
+                 trailTimer++;
+                 if (speed > 15 && trailTimer % 2 === 0) {
+                    createSpeedLine(cursorX, cursorY, angle);
+                 }
+              }
+              
+              globalCursor.style.transform = `translate(${cursorX}px, ${cursorY}px) rotate(${tilt}deg) scaleX(${scaleX}) scaleY(${scaleY})`;
+           } else {
+              // Cyberpunk is precise and direct
+              cursorX = mouseX;
+              cursorY = mouseY;
+              globalCursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
+           }
+        }
+
+        lastMouseX = mouseX;
+        lastMouseY = mouseY;
+
+        requestAnimationFrame(animateCursor);
+      };
+      requestAnimationFrame(animateCursor);
 
       const updateMousePosition = (e: MouseEvent) => {
         mouseX = e.clientX;
@@ -376,86 +494,35 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
       window.addEventListener('resize', updateScrollProgress, { passive: true });
 
-      const initLensEffect = () => {
-        const baseLayer = document.getElementById('base-layer');
-        const lensLayerInner = document.getElementById('lens-layer-inner');
-        if (baseLayer && lensLayerInner) {
-          const clone = baseLayer.cloneNode(true) as HTMLElement;
-          
-          // Strip the theme class from the clone so it inherits the lens-layer's theme
-          clone.className = 'w-full min-h-screen relative z-0';
-          
-          // Remove scripts and IDs to avoid duplicate execution and ID conflicts
-          clone.querySelectorAll('script').forEach(s => s.remove());
-          clone.id = '';
-          clone.querySelectorAll('[id]').forEach(el => el.id = '');
-          
-          // Extract the nav from the cloned content and attach it directly to the lensLayer 
-          // so that it stays fixed to the viewport instead of scrolling away with lensLayerInner
-          const lensLayer = document.getElementById('lens-layer');
-          const clonedNav = clone.querySelector('nav');
-          if (clonedNav && lensLayer) {
-            clonedNav.remove();
-            lensLayer.appendChild(clonedNav);
-          }
-          
-          lensLayerInner.appendChild(clone);
-          
-          const syncScroll = () => {
-             lensLayerInner.style.transform = `translateY(-${window.scrollY}px)`;
-          };
-          window.addEventListener('scroll', syncScroll, { passive: true });
-          syncScroll();
-
-          // SURE-FIRE HEIGHT SYNC: Force both layers to have identical panel heights
-          const syncHeights = () => {
-             if (!baseLayer || !lensLayerInner) return;
-             // Query only panels inside section/main to exclude the nav which was moved out of lensLayerInner
-             const basePanels = baseLayer.querySelectorAll('section .neo-panel, section .neo-box, main .neo-panel, main .neo-box');
-             const lensPanels = lensLayerInner.querySelectorAll('section .neo-panel, section .neo-box, main .neo-panel, main .neo-box');
-             
-             // Reset min-heights first to get natural heights
-             basePanels.forEach(p => (p as HTMLElement).style.minHeight = '0');
-             lensPanels.forEach(p => (p as HTMLElement).style.minHeight = '0');
-             
-             basePanels.forEach((baseEl, i) => {
-               const lensEl = lensPanels[i] as HTMLElement;
-               if (lensEl) {
-                 const baseHeight = (baseEl as HTMLElement).offsetHeight;
-                 const lensHeight = lensEl.offsetHeight;
-                 const max = Math.max(baseHeight, lensHeight);
-                 (baseEl as HTMLElement).style.minHeight = `${max}px`;
-                 lensEl.style.minHeight = `${max}px`;
-               }
-             });
-          };
-          
-          // Run sync on load, and on window resize
-          setTimeout(syncHeights, 100);
-          window.addEventListener('resize', () => {
-             setTimeout(syncHeights, 50);
-          });
-          
-          // Sync when theme toggles in case reflows occur
-          document.getElementById('theme-toggle')?.addEventListener('click', () => {
-             setTimeout(syncHeights, 100);
-          });
-        }
-        
+      const initCursorEffects = () => {
         document.body.addEventListener('mouseover', (e) => {
           const target = e.target as HTMLElement;
-          if (!target) return;
+          if (!target || !cursorComicDefault || !cursorComicPointer || !cursorComicText || !cursorComicThought) return;
 
-          const isClickable = target.closest('.neo-btn, button, a');
-          const isHeaderOrFooter = target.closest('nav, footer');
-          const isBox = target.closest('.neo-tag, .neo-box');
-          
-          if (isClickable || isHeaderOrFooter) {
-            targetLensSize = 15; // Shrink for interactive elements, header, and footer
-          } else if (isBox) {
-            targetLensSize = 120; // Enlarge lens for reading cards
+          const baseLayer = document.getElementById('base-layer');
+          if (!baseLayer?.classList.contains('theme-comic')) return;
+
+          const isClickable = target.closest('.neo-btn, button, a, [role="button"]');
+          const isText = target.closest('p, h1, h2, h3, h4, span, li');
+          const isCard = target.closest('.neo-panel, .neo-box, img');
+
+          // Reset all comic cursors
+          cursorComicDefault.style.opacity = '0';
+          cursorComicPointer.style.opacity = '0'; cursorComicPointer.style.transform = 'scale(0.5)';
+          cursorComicText.style.opacity = '0'; cursorComicText.style.transform = 'scale(0.5)';
+          cursorComicThought.style.opacity = '0'; cursorComicThought.style.transform = 'scale(0.5)';
+
+          if (isClickable) {
+            cursorComicPointer.style.opacity = '1';
+            cursorComicPointer.style.transform = 'scale(1)';
+          } else if (isCard && !isText) {
+            cursorComicThought.style.opacity = '1';
+            cursorComicThought.style.transform = 'scale(1)';
+          } else if (isText) {
+            cursorComicText.style.opacity = '1';
+            cursorComicText.style.transform = 'scale(1)';
           } else {
-            targetLensSize = 60; // Normal lens
+            cursorComicDefault.style.opacity = '1';
           }
         });
 
@@ -463,8 +530,8 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           const target = e.target as HTMLElement;
           if (!target) return;
           const isClickable = target.closest('.neo-btn, button, a');
-          if (isClickable) {
-            targetLensSize = 15; // Shrink to a small circle on click
+          if (isClickable && cursorComicPointer) {
+             cursorComicPointer.style.transform = 'scale(0.8)';
           }
         });
 
@@ -472,10 +539,8 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
           const target = e.target as HTMLElement;
           if (!target) return;
           const isClickable = target.closest('.neo-btn, button, a');
-          if (isClickable) {
-            targetLensSize = 30; // Restore to hover size
-          } else {
-            targetLensSize = 60; // Restore to normal
+          if (isClickable && cursorComicPointer) {
+             cursorComicPointer.style.transform = 'scale(1)';
           }
         });
       };
@@ -525,11 +590,11 @@ const resolvedImageURL = new URL(image ?? linkPreview.src, Astro.site ?? Astro.u
 
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-          initLensEffect();
+          initCursorEffects();
           initContactModal();
         });
       } else {
-        initLensEffect();
+        initCursorEffects();
         initContactModal();
       }
     </script>
